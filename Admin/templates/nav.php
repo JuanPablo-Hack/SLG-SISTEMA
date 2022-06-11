@@ -24,7 +24,7 @@
             <p class="centered"><a href="profile.html"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
             <h5 class="centered">Admin</h5>
             <li class="mt">
-                <a class="active" href="index.html">
+                <a class="active" href="index.php">
                     <i class="fa fa-dashboard"></i>
                     <span>Panel de Control</span>
                 </a>
