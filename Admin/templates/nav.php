@@ -32,11 +32,11 @@
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-calendar"></i>
-                    <span>Ingresos a granel</span>
+                    <span>Almacen</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden.php">Crear Registro</a></li>
-                    <li><a href="listar_orden.php">Bitacora</a></li>
+                    <li><a href="crear_orden.php">Ingreso de mercancia</a></li>
+                    <li><a href="listar_orden.php">Salidas de mercancia</a></li>
 
                 </ul>
             </li>

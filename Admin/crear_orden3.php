@@ -17,7 +17,7 @@ $result2 = mysqli_query($conexion, $sql2);
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Crear registro de viajes por ingresos a granel</h3>
+        <h3><i class="fa fa-angle-right"></i> Crear viajes</h3>
         <div class="row mt">
           <!--  DATE PICKERS -->
           <div class="col-lg-12">
@@ -25,13 +25,111 @@ $result2 = mysqli_query($conexion, $sql2);
               <form action="php/crear_orden3.php" class="form-horizontal style-form" method='POST'>
 
 
-
-
+                <div class="form-group">
+                  <label class="control-label col-md-3">Fecha de llegada</label>
+                  <div class="col-md-3 col-xs-11">
+                    <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="01-01-2014" class="input-append date dpYears">
+                      <input type="text" readonly="" value="01-01-2014" size="16" name='fecha' class="form-control">
+                      <span class="input-group-btn add-on">
+                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
+                      </span>
+                    </div>
+                    <span class="help-block">Select date</span>
+                  </div>
+                </div>
 
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Peso Bruto</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo de unidad</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_bruto' class="form-control">
+                    <select class="form-control" name='unidad'>
+                      <option value="0">-</option>
+                      <option value="0">Propias</option>
+                      <option value="0">Proveedor</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo de servicio</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='unidad'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo de carga</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='unidad'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo de contenedor</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='unidad'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                TODO: 
+                <!-- Si es contenedor tenemos que poner un campo de numero de contedores -->
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">
+                    Operador
+                  </label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='unidad'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                TODO:
+                <!-- Subir un archivo pdf  -->
+
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">
+                    Terminal de carga
+                  </label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='unidad'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -47,7 +145,13 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Línea Transportista </label>
+                  <label class="col-sm-2 col-sm-2 control-label">Peso Bruto</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='p_tara' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Destino de carga</label>
                   <div class="col-sm-4">
                     <input type="text" name='transportista' class="form-control">
                   </div>
