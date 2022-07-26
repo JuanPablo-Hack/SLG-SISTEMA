@@ -31,34 +31,34 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
-                    <span>Almacen</span>
+                    <i class="fa fa-anchor"></i>
+                    <span>Embarques</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden.php">Ingreso de mercancia</a></li>
-                    <li><a href="listar_orden.php">Salidas de mercancia</a></li>
+                    <li><a href="crear_orden.php">Bitacora de Embarques</a></li>
+                    
 
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
-                    <span>Consolidación de mercancias</span>
+                    <i class="fa fa-car"></i>
+                    <span>Unidades</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden2.php">Crear Registro</a></li>
-                    <li><a href="listar_orden2.php">Bitacora</a></li>
+
+                    <li><a href="listar_orden2.php">Mis unidades</a></li>
 
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
-                    <span>Consolidación de buque</span>
+                    <i class="fa fa-money"></i>
+                    <span>Facturas</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden3.php">Crear Registro</a></li>
-                    <li><a href="listar_orden3.php">Bitacora</a></li>
+                   
+                    <li><a href="listar_orden3.php">Lista de Facturas</a></li>
 
                 </ul>
             </li>
