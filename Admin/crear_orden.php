@@ -122,7 +122,13 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">No. placas </label>
+                  <label class="col-sm-2 col-sm-2 control-label">Placas tractocamión</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='lote' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Placas remolques</label>
                   <div class="col-sm-4">
                     <input type="text" name='lote' class="form-control">
                   </div>
@@ -157,24 +163,15 @@ $result2 = mysqli_query($conexion, $sql2);
                 <hr>
                 <h3>Datos de la mercancia</h3>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Cantidad</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Nombre de producto</label>
                   <div class="col-sm-4">
                     <input type="text" name='p_burto' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Unidad de medida</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Cantidad</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='operador'>
-                      <option value="0"></option>
-                      <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
-                      ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
+                    <input type="text" name='p_burto' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
@@ -183,17 +180,12 @@ $result2 = mysqli_query($conexion, $sql2);
                     <input type="text" name='lote' class="form-control">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Total de Bulto </label>
-                  <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
-                  </div>
-                </div>
+
                 TODO:
                 <!-- Poner firma de supervisor y de operador -->
+                 <!-- Poner fotos minimo unas 6 -->       
 
-
-                <div class="form-group">
+                <div class="form-group">    
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-theme" type="submit">Guardar</button>
                     <button class="btn btn-theme04" type="button">Cancelar</button>

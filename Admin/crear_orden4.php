@@ -26,7 +26,7 @@ $result2 = mysqli_query($conexion, $sql2);
 
 
                 <div class="form-group">
-                  <label class="control-label col-md-3">Fecha de llegada</label>
+                  <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">
                     <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="01-01-2014" class="input-append date dpYears">
                       <input type="text" readonly="" value="01-01-2014" size="16" name='fecha' class="form-control">
@@ -37,9 +37,10 @@ $result2 = mysqli_query($conexion, $sql2);
                     <span class="help-block">Select date</span>
                   </div>
                 </div>
-
+                TODO:
+                <!-- Unidades propias y de proveedores -->
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Tipo de unidad</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Unidad</label>
                   <div class="col-sm-4">
                     <select class="form-control" name='unidad'>
                       <option value="0">-</option>
@@ -93,8 +94,12 @@ $result2 = mysqli_query($conexion, $sql2);
                     </select>
                   </div>
                 </div>
-                TODO:
-                <!-- Si es contenedor tenemos que poner un campo de numero de contedores -->
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">No. caja o contenedor </label>
+                  <div class="col-sm-4">
+                    <input type="text" name='lote' class="form-control">
+                  </div>
+                </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">
                     Operador
@@ -113,7 +118,7 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
                 TODO:
-                <!-- Subir un archivo pdf  -->
+                <!-- Subir un archivo pdf dec  -->
 
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">
@@ -151,48 +156,44 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Destino de carga</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Destino</label>
                   <div class="col-sm-4">
                     <input type="text" name='transportista' class="form-control">
                   </div>
                 </div>
-
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Unidad</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Naviera</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
-                      <option value="0"></option>
-                      <?php
-                      while ($Row1 = mysqli_fetch_array($result2)) {
-                      ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
+                    <input type="text" name='transportista' class="form-control">
                   </div>
                 </div>
-
-
-
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Operador</label>
-                  <div class="col-sm-4">
-                    <select class="form-control" name='operador'>
-                      <option value="0"></option>
-                      <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
-                      ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
+                TODO:
+                <!-- Subir un imagenes del EIR  -->
+                TODO:
+                <!-- Subir un archivo pdf carta porte  -->
+                TODO:
+                <!-- Subir un archivo pdf carta instrucción -->                                      
 
                 TODO:
-                <!-- Subir un archivo pdf carta aporte y carta instrucción -->
+                <!-- Estadias con rango de fechas  -->
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Combustible</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='p_tara' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Viaticos</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='p_tara' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Casetas</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='p_tara' class="form-control">
+                  </div>
+                </div>
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-theme" type="submit">Guardar</button>

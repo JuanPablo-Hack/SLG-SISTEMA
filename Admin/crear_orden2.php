@@ -39,6 +39,59 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
                 <hr>
+                <h3>Datos de la unidad</h3>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Linea Transportista</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='p_burto' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Operador</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='p_neto' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Placas tractocamión</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='lote' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Placas remolques</label>
+                  <div class="col-sm-4">
+                    <input type="text" name='lote' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">No. caja o contenedor </label>
+                  <div class="col-sm-4">
+                    <input type="text" name='lote' class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo de Contenedor</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='operador'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">No. sello </label>
+                  <div class="col-sm-4">
+                    <input type="text" name='lote' class="form-control">
+                  </div>
+                </div>
+                <hr>
                 <h3>Datos de la mercancia</h3>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Cantidad de Salida</label>
@@ -61,15 +114,9 @@ $result2 = mysqli_query($conexion, $sql2);
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Descripción </label>
-                  <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
-                  </div>
-                </div>
                 TODO:
                 <!-- Poner firma de supervisor y de operador -->
-
+                <!-- Foto minimo unas 6 -->
 
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">

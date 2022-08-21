@@ -37,33 +37,29 @@
                 <ul class="sub">
                     <li><a href="crear_orden.php">Ingreso de mercancia</a></li>
                     <li><a href="listar_orden.php">Salidas de mercancia</a></li>
-
+                    <li><a href="listar_orden.php">Bitacora de mercancia</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-calendar"></i>
-                    <span>Consolidación de mercancias</span>
+                    <span>Viajes Locales</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden2.php">Crear Registro</a></li>
-                    <li><a href="listar_orden2.php">Bitacora</a></li>
-
+                    <li><a href="crear_orden2.php">Crear Viaje</a></li>
+                    <li><a href="listar_orden2.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-calendar"></i>
-                    <span>Consolidación de buque</span>
+                    <span>Viajes Foraneos</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden3.php">Crear Registro</a></li>
-                    <li><a href="listar_orden3.php">Bitacora</a></li>
-
+                    <li><a href="crear_orden2.php">Crear Viaje</a></li>
+                    <li><a href="listar_orden2.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
-
-
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-car"></i>
@@ -72,8 +68,20 @@
                 <ul class="sub">
                     <li><a href="alta_unidad.html">Dar de alta</a></li>
                     <li><a href="listar_unidades.php">Mis Unidades</a></li>
-
-
+                    <li><a href="alta_unidad.html">Tractocamiones y arrastres</a></li>
+                    <li><a href="alta_unidad.html">Mis Tractocamiones y arrastres</a></li>
+                    <li><a href="alta_unidad.html">Dar de operadores</a></li>
+                    <li><a href="listar_unidades.php">Mis operadores</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-group"></i>
+                    <span>Proovedores</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
+                    <li><a href="listar_trabajador.php">Lista tractocamiones y arrastres</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -82,14 +90,18 @@
                     <span>Usuarios</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="alta_trabajador.html">Crear Trabajador</a></li>
-                    <li><a href="listar_trabajador.php">Listar Trabajadores</a></li>
-
-
-
+                    <li><a href="listar_trabajador.php">Listar Clientes</a></li>
                 </ul>
             </li>
-
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-group"></i>
+                    <span>Variables del sistema</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="listar_trabajador.php">Listar Trabajadores</a></li>
+                </ul>
+            </li>
         </ul>
         <!-- sidebar menu end-->
     </div>
