@@ -10,6 +10,7 @@ $result2 = mysqli_query($conexion, $sql2);
 
 <head>
   <?php include("templates/head.php"); ?>
+  <link rel="stylesheet" type="text/css" href="../assets/lib/bootstrap-fileupload/bootstrap-fileupload.css" />
 </head>
 
 <body>
@@ -37,15 +38,23 @@ $result2 = mysqli_query($conexion, $sql2);
                     <span class="help-block">Select date</span>
                   </div>
                 </div>
-                TODO:
-                <!-- Unidades propias y de proveedores -->
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Unidad</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo unidad</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='tipo_unidad'>
+                      <option value="0">-</option>
+                      <option value="1">Propias</option>
+                      <option value="2">Proveedor</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Unidad Asignada</label>
                   <div class="col-sm-4">
                     <select class="form-control" name='unidad'>
                       <option value="0">-</option>
-                      <option value="0">Propias</option>
-                      <option value="0">Proveedor</option>
+                      <option value="1">Propias</option>
+                      <option value="2">Proveedor</option>
                     </select>
                   </div>
                 </div>
@@ -117,8 +126,20 @@ $result2 = mysqli_query($conexion, $sql2);
                     </select>
                   </div>
                 </div>
-                TODO:
-                <!-- Subir un archivo pdf dec  -->
+                <div class="form-group">
+                  <label class="control-label col-md-3">Subir DEC</label>
+                  <div class="controls col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <span class="btn btn-theme02 btn-file">
+                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
+                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
+                        <input type="file" class="default" />
+                      </span>
+                      <span class="fileupload-preview" style="margin-left:5px;"></span>
+                      <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">
@@ -167,15 +188,59 @@ $result2 = mysqli_query($conexion, $sql2);
                     <input type="text" name='transportista' class="form-control">
                   </div>
                 </div>
-                TODO:
-                <!-- Subir un imagenes del EIR  -->
-                TODO:
-                <!-- Subir un archivo pdf carta porte  -->
-                TODO:
-                <!-- Subir un archivo pdf carta instrucción -->                                      
-
-                TODO:
-                <!-- Estadias con rango de fechas  -->
+                <div class="form-group">
+                  <label class="control-label col-md-3">Subir EIR</label>
+                  <div class="controls col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <span class="btn btn-theme02 btn-file">
+                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
+                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
+                        <input type="file" class="default" />
+                      </span>
+                      <span class="fileupload-preview" style="margin-left:5px;"></span>
+                      <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Subir Carta porte</label>
+                  <div class="controls col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <span class="btn btn-theme02 btn-file">
+                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
+                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
+                        <input type="file" class="default" />
+                      </span>
+                      <span class="fileupload-preview" style="margin-left:5px;"></span>
+                      <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Subir Carta instrucción</label>
+                  <div class="controls col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <span class="btn btn-theme02 btn-file">
+                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
+                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
+                        <input type="file" class="default" />
+                      </span>
+                      <span class="fileupload-preview" style="margin-left:5px;"></span>
+                      <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Estadías</label>
+                  <div class="col-md-4">
+                    <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+                      <input type="text" class="form-control dpd1" name="from">
+                      <span class="input-group-addon">To</span>
+                      <input type="text" class="form-control dpd2" name="to">
+                    </div>
+                    <span class="help-block">Select date range</span>
+                  </div>
+                </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Combustible</label>
                   <div class="col-sm-4">
@@ -223,7 +288,7 @@ $result2 = mysqli_query($conexion, $sql2);
       </section>
       <!-- /wrapper -->
     </section>
-    <?php include("templates/footer../assets/.php"); ?>
+    <?php include("templates/footer.php"); ?>
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="../assets/lib/jquery/jquery.min.js"></script>

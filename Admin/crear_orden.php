@@ -35,7 +35,7 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Cliente</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='cliente'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -50,20 +50,20 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de llegada</label>
                   <div class="col-md-3 col-xs-11">
-                    <input class="form-control form-control-inline" size="16" type="date">
+                    <input class="form-control form-control-inline" size="16" type="date" name="fecha">
                     <span class="help-block">Selecciona una fecha</span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Hora de llegada</label>
                   <div class="col-sm-4">
-                    <input type="text" name='mina' class="form-control">
+                    <input type="text" name='hora' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de mercancia</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='operador'>
+                    <select class="form-control" name='mercancia'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result4)) {
@@ -78,7 +78,7 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Presentación de mercancia</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='operador'>
+                    <select class="form-control" name='presentacion_mercancia'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result3)) {
@@ -93,13 +93,13 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">No. Pedimento</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_burto' class="form-control">
+                    <input type="text" name='p_burto' class="form-control" name="pedimento">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de operacion</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='operador'>
+                    <select class="form-control" name='tipo_operacion'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result5)) {
@@ -116,37 +116,37 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Linea Transportista</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_burto' class="form-control">
+                    <input type="text" name='transportista' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Operador</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_neto' class="form-control">
+                    <input type="text" name='operador' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Placas tractocamión</label>
                   <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
+                    <input type="text" name='placas_tracto' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Placas remolques</label>
                   <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
+                    <input type="text" name='placas_remolque' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">No. caja o contenedor </label>
                   <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
+                    <input type="text" name='no_caja' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de Contenedor</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='operador'>
+                    <select class="form-control" name='tipo_contenedor'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result6)) {
@@ -161,7 +161,7 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">No. sello </label>
                   <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
+                    <input type="text" name='no_sello' class="form-control">
                   </div>
                 </div>
                 <hr>
@@ -169,19 +169,19 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Nombre de producto</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_burto' class="form-control">
+                    <input type="text" name='nombre_producto' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Cantidad</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_burto' class="form-control">
+                    <input type="text" name='cantidad' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Descripción </label>
                   <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
+                    <input type="text" name='descripcion' class="form-control">
                   </div>
                 </div>
 

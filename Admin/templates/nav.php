@@ -31,32 +31,32 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-tag"></i>
                     <span>Almacen</span>
                 </a>
                 <ul class="sub">
                     <li><a href="crear_orden.php">Ingreso de mercancia</a></li>
-                    <li><a href="listar_orden.php">Salidas de mercancia</a></li>
+                    <li><a href="crear_orden2.php">Salidas de mercancia</a></li>
                     <li><a href="listar_orden.php">Bitacora de mercancia</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-truck"></i>
                     <span>Viajes Locales</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden2.php">Crear Viaje</a></li>
+                    <li><a href="crear_orden3.php">Crear Viaje</a></li>
                     <li><a href="listar_orden2.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-plane"></i>
                     <span>Viajes Foraneos</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden2.php">Crear Viaje</a></li>
+                    <li><a href="crear_orden4.php">Crear Viaje</a></li>
                     <li><a href="listar_orden2.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
@@ -77,29 +77,30 @@
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-group"></i>
-                    <span>Proovedores</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
-                    <li><a href="listar_trabajador.php">Lista tractocamiones y arrastres</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-group"></i>
                     <span>Usuarios</span>
                 </a>
                 <ul class="sub">
+                    <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
+                    <li><a href="listar_trabajador.php">Lista tractocamiones</a></li>
                     <li><a href="listar_trabajador.php">Listar Clientes</a></li>
+                    <li><a href="alta_trabajador.html">Crear de trabajador</a></li>
+                    <li><a href="alta_trabajador.html">Lista de trabajadores</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-group"></i>
+                    <i class="fa fa-cogs"></i>
                     <span>Variables del sistema</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="listar_trabajador.php">Listar Trabajadores</a></li>
+                    <li><a href="listar_unidades.php">Tipos de mercancia</a></li>
+                    <li><a href="listar_unidades.php">Presentaciones de mercancia</a></li>
+                    <li><a href="listar_unidades.php">Tipos de operacion</a></li>
+                    <li><a href="listar_unidades.php">Tipos de contenedor</a></li>
+                    <li><a href="listar_unidades.php">Unidades de medida</a></li>
+                    <li><a href="listar_unidades.php">Tipos de servicio</a></li>
+                    <li><a href="listar_unidades.php">Tipos de carga</a></li>
+                    <li><a href="listar_unidades.php">Terminales de carga</a></li>
                 </ul>
             </li>
         </ul>
