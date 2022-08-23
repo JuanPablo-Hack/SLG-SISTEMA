@@ -2,14 +2,23 @@
 include 'php/conexion.php';
 $sql = "SELECT * FROM trabajador";
 $result = mysqli_query($conexion, $sql);
-$sql2 = "SELECT * FROM unidades";
+$sql2 = "SELECT * FROM clientes";
 $result2 = mysqli_query($conexion, $sql2);
+$sql3 = "SELECT * FROM presentacion_mercancia";
+$result3 = mysqli_query($conexion, $sql3);
+$sql4 = "SELECT * FROM tipo_mercancia";
+$result4 = mysqli_query($conexion, $sql4);
+$sql5 = "SELECT * FROM tipo_operacion";
+$result5 = mysqli_query($conexion, $sql5);
+$sql6 = "SELECT * FROM tipo_contenedor";
+$result6 = mysqli_query($conexion, $sql6);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <?php include("templates/head.php"); ?>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-fileupload/bootstrap-fileupload.css" />
 </head>
 
 <body>
@@ -31,7 +40,7 @@ $result2 = mysqli_query($conexion, $sql2);
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -41,13 +50,8 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de llegada</label>
                   <div class="col-md-3 col-xs-11">
-                    <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="01-01-2014" class="input-append date dpYears">
-                      <input type="text" readonly="" value="01-01-2014" size="16" name='fecha' class="form-control">
-                      <span class="input-group-btn add-on">
-                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
-                      </span>
-                    </div>
-                    <span class="help-block">Select date</span>
+                    <input class="form-control form-control-inline" size="16" type="date">
+                    <span class="help-block">Selecciona una fecha</span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -62,7 +66,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='operador'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
+                      while ($Row1 = mysqli_fetch_array($result4)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
@@ -77,7 +81,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='operador'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
+                      while ($Row1 = mysqli_fetch_array($result3)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
@@ -98,7 +102,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='operador'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
+                      while ($Row1 = mysqli_fetch_array($result5)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
@@ -145,7 +149,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='operador'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
+                      while ($Row1 = mysqli_fetch_array($result6)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
@@ -181,11 +185,23 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
 
-                TODO:
-                <!-- Poner firma de supervisor y de operador -->
-                 <!-- Poner fotos minimo unas 6 -->       
 
-                <div class="form-group">    
+
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Firma de supervisor</label>
+                  <div class="col-md-9">
+                    <canvas id="canvas" style="border: 1px solid #000;  width: 250px; height: 150px;"></canvas>
+                  </div>
+                </div>
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Firma de operador</label>
+                  <div class="col-md-9">
+                    <canvas id="canvas" style="border: 1px solid #000;  width: 250px; height: 150px;"></canvas>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-theme" type="submit">Guardar</button>
                     <button class="btn btn-theme04" type="button">Cancelar</button>
@@ -234,6 +250,96 @@ $result2 = mysqli_query($conexion, $sql2);
   <script type="text/javascript" src="../assets/lib/bootstrap-daterangepicker/moment.min.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script src="../assets/lib/advanced-form-components.js"></script>
+  <script>
+    let miCanvas = document.querySelector("#canvas");
+    let lineas = [];
+    let correccionX = 0;
+    let correccionY = 0;
+    let pintarLinea = false;
+    // Marca el nuevo punto
+    let nuevaPosicionX = 0;
+    let nuevaPosicionY = 0;
+
+    let posicion = miCanvas.getBoundingClientRect();
+    correccionX = posicion.x;
+    correccionY = posicion.y;
+
+    miCanvas.width = 250;
+    miCanvas.height = 150;
+
+    //======================================================================
+    // FUNCIONES
+    //======================================================================
+
+    /**
+     * Funcion que empieza a dibujar la linea
+     */
+    function empezarDibujo() {
+      pintarLinea = true;
+      lineas.push([]);
+    }
+
+    /**
+     * Funcion que guarda la posicion de la nueva línea
+     */
+    function guardarLinea() {
+      lineas[lineas.length - 1].push({
+        x: nuevaPosicionX,
+        y: nuevaPosicionY,
+      });
+    }
+
+    /**
+     * Funcion dibuja la linea
+     */
+    function dibujarLinea(event) {
+      event.preventDefault();
+      if (pintarLinea) {
+        let ctx = miCanvas.getContext("2d");
+        // Estilos de linea
+        ctx.lineJoin = ctx.lineCap = "round";
+        ctx.lineWidth = 2;
+        // Color de la linea
+        ctx.strokeStyle = "#000000";
+        // Marca el nuevo punto
+        if (event.changedTouches == undefined) {
+          // Versión ratón
+          nuevaPosicionX = event.layerX;
+          nuevaPosicionY = event.layerY;
+        } else {
+          // Versión touch, pantalla tactil
+          nuevaPosicionX = event.changedTouches[0].pageX - correccionX;
+          nuevaPosicionY = event.changedTouches[0].pageY - correccionY;
+        }
+        // Guarda la linea
+        guardarLinea();
+        // Redibuja todas las lineas guardadas
+        ctx.beginPath();
+        lineas.forEach(function(segmento) {
+          ctx.moveTo(segmento[0].x, segmento[0].y);
+          segmento.forEach(function(punto, index) {
+            ctx.lineTo(punto.x, punto.y);
+          });
+        });
+        ctx.stroke();
+      }
+    }
+
+    /**
+     * Funcion que deja de dibujar la linea
+     */
+    function pararDibujar() {
+      pintarLinea = false;
+      guardarLinea();
+    }
+
+    //======================================================================
+    // EVENTOS
+    //======================================================================
+    // Eventos pantallas táctiles
+    miCanvas.addEventListener("touchstart", empezarDibujo, false);
+    miCanvas.addEventListener("touchmove", dibujarLinea, false);
+  </script>
 
 </body>
 
