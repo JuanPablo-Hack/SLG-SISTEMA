@@ -17,11 +17,11 @@ include 'php/conexion.php';
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Bitacora de Viajes</h3>
+        <h3><i class="fa fa-angle-right"></i> Lista de mercancias</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
-            <a href="./crear_mercancia.php" class="btn btn-success">Crear nueva mercancia</a> <br><br>
+            <a href="./crear_presentacion.php" class="btn btn-success">Crear nueva mercancia</a> <br><br>
             <div class="adv-table">
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
@@ -42,8 +42,8 @@ include 'php/conexion.php';
                       <td><?php echo $mostrar['nombre'] ?></td>
                       <td><?php echo $mostrar['descrip'] ?></td>
                       <td>
-                        <a href='./editar_mercancia.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a onclick="eliminiarmercancia(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
+                        <a href='./editar_presentacion.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a onclick="eliminarpresentacion(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
                       </td>
                     </tr>
                   <?php
@@ -79,7 +79,7 @@ include 'php/conexion.php';
   <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
   <!--script for this page-->
   <script>
-    function eliminiarmercancia(id) {
+    function eliminarpresentacion(id) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: "btn btn-success",
@@ -103,7 +103,7 @@ include 'php/conexion.php';
             let data = new FormData();
             data.append("id", id);
             data.append("accion", "eliminar");
-            fetch("php/mercancia_controller.php", {
+            fetch("php/presentacion_controller.php", {
                 method: "POST",
                 body: data,
               })

@@ -94,8 +94,8 @@
                 </a>
                 <ul class="sub">
                     <li><a href="listar_mercancia.php">Tipos de mercancia</a></li>
-                    <li><a href="listar_unidades.php">Presentaciones de mercancia</a></li>
-                    <li><a href="listar_unidades.php">Tipos de operacion</a></li>
+                    <li><a href="listar_presentaciones.php">Presentaciones de mercancia</a></li>
+                    <li><a href="listar_tiposoperaciones.php">Tipos de operacion</a></li>
                     <li><a href="listar_unidades.php">Tipos de contenedor</a></li>
                     <li><a href="listar_unidades.php">Unidades de medida</a></li>
                     <li><a href="listar_unidades.php">Tipos de servicio</a></li>

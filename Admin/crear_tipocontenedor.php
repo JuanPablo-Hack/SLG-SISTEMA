@@ -1,9 +1,6 @@
 <?php
 include 'php/conexion.php';
-$id_mercancia = $_GET['id'];
-$sql = "SELECT * FROM mercancia WHERE id='$id_mercancia'";
-$resultado = $conexion->query($sql);
-$row = mysqli_fetch_array($resultado);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,23 +15,23 @@ $row = mysqli_fetch_array($resultado);
         <?php include("templates/nav.php"); ?>
         <section id="main-content">
             <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i>Crear ingreso de almacen</h3>
+                <h3><i class="fa fa-angle-right"></i>Crear tipo contenedor</h3>
                 <div class="row mt">
                     <!--  DATE PICKERS -->
                     <div class="col-lg-12">
                         <div class="form-panel">
-                            <form class="form-horizontal style-form" id="formMercanciaEditar">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
+                            <form class="form-horizontal style-form" id="formTipoContenedor">
+
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Nombre </label>
                                     <div class="col-sm-4">
-                                        <input type="text" name='nombre' class="form-control" value="<?php echo $row['nombre']; ?>" required />
+                                        <input type="text" name='nombre' class="form-control" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Descripción </label>
                                     <div class="col-lg-10">
-                                        <textarea class="form-control " id="ccomment" name="descripcion" required><?php echo $row['descrip']; ?></textarea>
+                                        <textarea class="form-control " id="ccomment" name="descripcion" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -80,12 +77,12 @@ $row = mysqli_fetch_array($resultado);
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
-                .getElementById("formMercanciaEditar")
-                .addEventListener("submit", formMercanciaEditar);
+                .getElementById("formTipoContenedor")
+                .addEventListener("submit", formTipoContenedor);
         });
-        async function formMercanciaEditar(e) {
+        async function formTipoContenedor(e) {
             e.preventDefault();
-            var form = document.getElementById("formMercanciaEditar");
+            var form = document.getElementById("formTipoContenedor");
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -105,8 +102,8 @@ $row = mysqli_fetch_array($resultado);
                 .then((result) => {
                     if (result.isConfirmed) {
                         let data = new FormData(form);
-                        data.append("accion", "editar");
-                        fetch("php/mercancia_controller.php", {
+                        data.append("accion", "agregar");
+                        fetch("php/presentacion_controller.php", {
                                 method: "POST",
                                 body: data,
                             })

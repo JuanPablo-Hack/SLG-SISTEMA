@@ -1,7 +1,7 @@
 <?php
 include 'php/conexion.php';
 $id_mercancia = $_GET['id'];
-$sql = "SELECT * FROM mercancia WHERE id='$id_mercancia'";
+$sql = "SELECT * FROM tipo_operacion WHERE id='$id_mercancia'";
 $resultado = $conexion->query($sql);
 $row = mysqli_fetch_array($resultado);
 ?>
@@ -23,7 +23,7 @@ $row = mysqli_fetch_array($resultado);
                     <!--  DATE PICKERS -->
                     <div class="col-lg-12">
                         <div class="form-panel">
-                            <form class="form-horizontal style-form" id="formMercanciaEditar">
+                            <form class="form-horizontal style-form" id="formEditarTipoOperacion">
                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Nombre </label>
@@ -80,12 +80,12 @@ $row = mysqli_fetch_array($resultado);
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
-                .getElementById("formMercanciaEditar")
-                .addEventListener("submit", formMercanciaEditar);
+                .getElementById("formEditarTipoOperacion")
+                .addEventListener("submit", formEditarTipoOperacion);
         });
-        async function formMercanciaEditar(e) {
+        async function formEditarTipoOperacion(e) {
             e.preventDefault();
-            var form = document.getElementById("formMercanciaEditar");
+            var form = document.getElementById("formEditarTipoOperacion");
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -106,7 +106,7 @@ $row = mysqli_fetch_array($resultado);
                     if (result.isConfirmed) {
                         let data = new FormData(form);
                         data.append("accion", "editar");
-                        fetch("php/mercancia_controller.php", {
+                        fetch("php/tipooperacion_controller.php", {
                                 method: "POST",
                                 body: data,
                             })

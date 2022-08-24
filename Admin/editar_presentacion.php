@@ -1,7 +1,7 @@
 <?php
 include 'php/conexion.php';
 $id_mercancia = $_GET['id'];
-$sql = "SELECT * FROM mercancia WHERE id='$id_mercancia'";
+$sql = "SELECT * FROM presentacion_mercancia WHERE id='$id_mercancia'";
 $resultado = $conexion->query($sql);
 $row = mysqli_fetch_array($resultado);
 ?>
