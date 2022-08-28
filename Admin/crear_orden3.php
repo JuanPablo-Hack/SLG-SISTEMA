@@ -23,7 +23,7 @@ $result2 = mysqli_query($conexion, $sql2);
           <!--  DATE PICKERS -->
           <div class="col-lg-12">
             <div class="form-panel">
-              <form action="php/crear_orden3.php" class="form-horizontal style-form" method='POST'>
+              <form class="form-horizontal style-form" id="formViajeLocal" enctype="multipart/form-data">
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">
@@ -60,7 +60,7 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de servicio</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='tipo_servicio'>
                       <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -75,7 +75,7 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de carga</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='tipo_carga'>
                       <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -90,7 +90,7 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de contenedor</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='tipo_contenedor'>
                       <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -105,7 +105,7 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">No. caja o contenedor </label>
                   <div class="col-sm-4">
-                    <input type="text" name='lote' class="form-control">
+                    <input type="text" name='no_caja' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
@@ -113,7 +113,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     Operador
                   </label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='operador'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -132,7 +132,7 @@ $result2 = mysqli_query($conexion, $sql2);
                       <span class="btn btn-theme02 btn-file">
                         <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
                         <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
-                        <input type="file" class="default" />
+                        <input type="file" class="default" name="dec" />
                       </span>
                       <span class="fileupload-preview" style="margin-left:5px;"></span>
                       <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
@@ -145,7 +145,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     Terminal de carga
                   </label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='terminal_carga'>
                       <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -172,19 +172,19 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Peso Bruto</label>
                   <div class="col-sm-4">
-                    <input type="text" name='p_tara' class="form-control">
+                    <input type="text" name='p_bruto' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Patio de destino</label>
                   <div class="col-sm-4">
-                    <input type="text" name='transportista' class="form-control">
+                    <input type="text" name='patio_destino' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Naviera</label>
                   <div class="col-sm-4">
-                    <input type="text" name='transportista' class="form-control">
+                    <input type="text" name='naviera' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
@@ -194,21 +194,20 @@ $result2 = mysqli_query($conexion, $sql2);
                       <span class="btn btn-theme02 btn-file">
                         <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
                         <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
-                        <input type="file" class="default" />
+                        <input type="file" class="default" name="eir" />
                       </span>
                       <span class="fileupload-preview" style="margin-left:5px;"></span>
                       <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
                     </div>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <label class="control-label col-md-3">Estadías</label>
                   <div class="col-md-4">
                     <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                      <input type="text" class="form-control dpd1" name="from">
+                      <input type="text" class="form-control dpd1" name="inicio_estadia">
                       <span class="input-group-addon">To</span>
-                      <input type="text" class="form-control dpd2" name="to">
+                      <input type="text" class="form-control dpd2" name="fin_estadia">
                     </div>
                     <span class="help-block">Select date range</span>
                   </div>
@@ -262,6 +261,79 @@ $result2 = mysqli_query($conexion, $sql2);
   <script type="text/javascript" src="../assets/lib/bootstrap-daterangepicker/moment.min.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script src="../assets/lib/advanced-form-components.js"></script>
+  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document
+        .getElementById("formViajeLocal")
+        .addEventListener("submit", formViajeLocal);
+    });
+    async function formViajeLocal(e) {
+      e.preventDefault();
+      var form = document.getElementById("formViajeLocalx");
+      const image = miCanvas.toDataURL("image/png");
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Estas seguro que la información es la correcta?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, agregar actividad",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            let data = new FormData(form);
+            data.append("accion", "salida");
+            data.append("firma", image);
+            fetch("php/almacen_controller.php", {
+                method: "POST",
+                body: data,
+              })
+              .then((result) => result.text())
+              .then((result) => {
+                if (result == 1) {
+                  swalWithBootstrapButtons.fire(
+                    "Agregado!",
+                    "La actividad ha sido agregado en la base de datos.",
+                    "success"
+                  );
+                  form.reset();
+                  setTimeout(function() {
+                    location.reload();
+                  }, 2000);
+                } else {
+                  swalWithBootstrapButtons.fire(
+                    "Error",
+                    "Hemos tenido un error a la base de datos o la conexión.",
+                    "error"
+                  );
+                  // form.reset();
+                  // setTimeout(function() {
+                  //     location.reload();
+                  // }, 2000);
+                }
+              });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelado",
+              "Revise su información de nuevo",
+              "error"
+            );
+          }
+        });
+    }
+  </script>
 
 </body>
 

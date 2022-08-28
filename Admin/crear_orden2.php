@@ -1,6 +1,6 @@
 <?php
 include 'php/conexion.php';
-$sql = "SELECT * FROM trabajador";
+$sql = "SELECT * FROM tipo_contenedor";
 $result = mysqli_query($conexion, $sql);
 $sql2 = "SELECT * FROM unidades";
 $result2 = mysqli_query($conexion, $sql2);
@@ -22,11 +22,11 @@ $result2 = mysqli_query($conexion, $sql2);
           <!--  DATE PICKERS -->
           <div class="col-lg-12">
             <div class="form-panel">
-              <form action="php/crear_orden.php" class="form-horizontal style-form" method='POST'>
+              <form class="form-horizontal style-form" id="formSalidaMercancia" enctype="multipart/form-data">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Folio de mercancia</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
+                    <select class="form-control" name='id_mercancia'>
                       <option value="0"></option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
@@ -67,7 +67,7 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">No. caja o contenedor </label>
                   <div class="col-sm-4">
-                    <input type="text" name='no_contenedor' class="form-control">
+                    <input type="text" name='no_caja' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
@@ -121,12 +121,143 @@ $result2 = mysqli_query($conexion, $sql2);
                   </div>
                 </div>
                 <div class="form-group last">
-                  <label class="control-label col-md-3">Firma de operador</label>
+                  <label class="control-label col-md-3">Subir imagen de la mercancia</label>
                   <div class="col-md-9">
-                    <canvas id="canvas2" style="border: 1px solid #000;  width: 250px; height: 150px;"></canvas>
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                      <div>
+                        <span class="btn btn-theme02 btn-file">
+                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Seleccionar Imagen</span>
+                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                          <input type="file" class="form-control" id="image" name="foto1" multiple>
+                        </span>
+                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                      </div>
+                    </div>
+                    <span class="label label-info">NOTA!</span>
+                    <span>
+                      No se te olvide adjuntar todas las fotos de las evidencias del servicio.
+                    </span>
                   </div>
                 </div>
-
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Subir imagen de la mercancia</label>
+                  <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                      <div>
+                        <span class="btn btn-theme02 btn-file">
+                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Seleccionar Imagen</span>
+                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                          <input type="file" class="form-control" id="image" name="foto2" multiple>
+                        </span>
+                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                      </div>
+                    </div>
+                    <span class="label label-info">NOTA!</span>
+                    <span>
+                      No se te olvide adjuntar todas las fotos de las evidencias del servicio.
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Subir imagen de la mercancia</label>
+                  <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                      <div>
+                        <span class="btn btn-theme02 btn-file">
+                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Seleccionar Imagen</span>
+                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                          <input type="file" class="form-control" id="image" name="foto3" multiple>
+                        </span>
+                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                      </div>
+                    </div>
+                    <span class="label label-info">NOTA!</span>
+                    <span>
+                      No se te olvide adjuntar todas las fotos de las evidencias del servicio.
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Subir imagen de la mercancia</label>
+                  <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                      <div>
+                        <span class="btn btn-theme02 btn-file">
+                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Seleccionar Imagen</span>
+                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                          <input type="file" class="form-control" id="image" name="foto4" multiple>
+                        </span>
+                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                      </div>
+                    </div>
+                    <span class="label label-info">NOTA!</span>
+                    <span>
+                      No se te olvide adjuntar todas las fotos de las evidencias del servicio.
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Subir imagen de la mercancia</label>
+                  <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                      <div>
+                        <span class="btn btn-theme02 btn-file">
+                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Seleccionar Imagen</span>
+                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                          <input type="file" class="form-control" id="image" name="foto5" multiple>
+                        </span>
+                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                      </div>
+                    </div>
+                    <span class="label label-info">NOTA!</span>
+                    <span>
+                      No se te olvide adjuntar todas las fotos de las evidencias del servicio.
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group last">
+                  <label class="control-label col-md-3">Subir imagen de la mercancia</label>
+                  <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                      <div>
+                        <span class="btn btn-theme02 btn-file">
+                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Seleccionar Imagen</span>
+                          <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                          <input type="file" class="form-control" id="image" name="foto6" multiple>
+                        </span>
+                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                      </div>
+                    </div>
+                    <span class="label label-info">NOTA!</span>
+                    <span>
+                      No se te olvide adjuntar todas las fotos de las evidencias del servicio.
+                    </span>
+                  </div>
+                </div>
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-theme" type="submit">Guardar</button>
@@ -169,193 +300,88 @@ $result2 = mysqli_query($conexion, $sql2);
   <!--script for this page-->
   <script src="../assets/lib/jquery-ui-1.9.2.custom.min.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-  <script type="text/javascript" src="../assets/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="../assets/ib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-daterangepicker/date.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-daterangepicker/moment.min.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script src="../assets/lib/advanced-form-components.js"></script>
-  <script src="./main.js"></script>
+  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="js/firmar.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/controller.js"></script>
   <script>
-    let miCanvas = document.querySelector("#canvas");
-    let lineas = [];
-    let correccionX = 0;
-    let correccionY = 0;
-    let pintarLinea = false;
-    // Marca el nuevo punto
-    let nuevaPosicionX = 0;
-    let nuevaPosicionY = 0;
-
-    let posicion = miCanvas.getBoundingClientRect();
-    correccionX = posicion.x;
-    correccionY = posicion.y;
-
-    miCanvas.width = 250;
-    miCanvas.height = 150;
-
-    //======================================================================
-    // FUNCIONES
-    //======================================================================
-
-    /**
-     * Funcion que empieza a dibujar la linea
-     */
-    function empezarDibujo() {
-      pintarLinea = true;
-      lineas.push([]);
-    }
-
-    /**
-     * Funcion que guarda la posicion de la nueva línea
-     */
-    function guardarLinea() {
-      lineas[lineas.length - 1].push({
-        x: nuevaPosicionX,
-        y: nuevaPosicionY,
+    document.addEventListener("DOMContentLoaded", function() {
+      document
+        .getElementById("formSalidaMercancia")
+        .addEventListener("submit", formSalidaMercancia);
+    });
+    async function formSalidaMercancia(e) {
+      e.preventDefault();
+      var form = document.getElementById("formSalidaMercancia");
+      const image = miCanvas.toDataURL("image/png");
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
       });
-    }
-
-    /**
-     * Funcion dibuja la linea
-     */
-    function dibujarLinea(event) {
-      event.preventDefault();
-      if (pintarLinea) {
-        let ctx = miCanvas.getContext("2d");
-        // Estilos de linea
-        ctx.lineJoin = ctx.lineCap = "round";
-        ctx.lineWidth = 2;
-        // Color de la linea
-        ctx.strokeStyle = "#000000";
-        // Marca el nuevo punto
-        if (event.changedTouches == undefined) {
-          // Versión ratón
-          nuevaPosicionX = event.layerX;
-          nuevaPosicionY = event.layerY;
-        } else {
-          // Versión touch, pantalla tactil
-          nuevaPosicionX = event.changedTouches[0].pageX - correccionX;
-          nuevaPosicionY = event.changedTouches[0].pageY - correccionY;
-        }
-        // Guarda la linea
-        guardarLinea();
-        // Redibuja todas las lineas guardadas
-        ctx.beginPath();
-        lineas.forEach(function(segmento) {
-          ctx.moveTo(segmento[0].x, segmento[0].y);
-          segmento.forEach(function(punto, index) {
-            ctx.lineTo(punto.x, punto.y);
-          });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Estas seguro que la información es la correcta?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, agregar actividad",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            let data = new FormData(form);
+            data.append("accion", "salida");
+            data.append("firma", image);
+            fetch("php/almacen_controller.php", {
+                method: "POST",
+                body: data,
+              })
+              .then((result) => result.text())
+              .then((result) => {
+                if (result == 1) {
+                  swalWithBootstrapButtons.fire(
+                    "Agregado!",
+                    "La actividad ha sido agregado en la base de datos.",
+                    "success"
+                  );
+                  form.reset();
+                  setTimeout(function() {
+                    location.reload();
+                  }, 2000);
+                } else {
+                  swalWithBootstrapButtons.fire(
+                    "Error",
+                    "Hemos tenido un error a la base de datos o la conexión.",
+                    "error"
+                  );
+                  // form.reset();
+                  // setTimeout(function() {
+                  //     location.reload();
+                  // }, 2000);
+                }
+              });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelado",
+              "Revise su información de nuevo",
+              "error"
+            );
+          }
         });
-        ctx.stroke();
-      }
     }
-
-    /**
-     * Funcion que deja de dibujar la linea
-     */
-    function pararDibujar() {
-      pintarLinea = false;
-      guardarLinea();
-    }
-
-    //======================================================================
-    // EVENTOS
-    //======================================================================
-    // Eventos pantallas táctiles
-    miCanvas.addEventListener("touchstart", empezarDibujo, false);
-    miCanvas.addEventListener("touchmove", dibujarLinea, false);
-  </script>
-  <script>
-    let miCanvas = document.querySelector("#canvas2");
-    let lineas = [];
-    let correccionX = 0;
-    let correccionY = 0;
-    let pintarLinea = false;
-    // Marca el nuevo punto
-    let nuevaPosicionX = 0;
-    let nuevaPosicionY = 0;
-
-    let posicion = miCanvas.getBoundingClientRect();
-    correccionX = posicion.x;
-    correccionY = posicion.y;
-
-    miCanvas.width = 250;
-    miCanvas.height = 150;
-
-    //======================================================================
-    // FUNCIONES
-    //======================================================================
-
-    /**
-     * Funcion que empieza a dibujar la linea
-     */
-    function empezarDibujo() {
-      pintarLinea = true;
-      lineas.push([]);
-    }
-
-    /**
-     * Funcion que guarda la posicion de la nueva línea
-     */
-    function guardarLinea() {
-      lineas[lineas.length - 1].push({
-        x: nuevaPosicionX,
-        y: nuevaPosicionY,
-      });
-    }
-
-    /**
-     * Funcion dibuja la linea
-     */
-    function dibujarLinea(event) {
-      event.preventDefault();
-      if (pintarLinea) {
-        let ctx = miCanvas.getContext("2d");
-        // Estilos de linea
-        ctx.lineJoin = ctx.lineCap = "round";
-        ctx.lineWidth = 2;
-        // Color de la linea
-        ctx.strokeStyle = "#000000";
-        // Marca el nuevo punto
-        if (event.changedTouches == undefined) {
-          // Versión ratón
-          nuevaPosicionX = event.layerX;
-          nuevaPosicionY = event.layerY;
-        } else {
-          // Versión touch, pantalla tactil
-          nuevaPosicionX = event.changedTouches[0].pageX - correccionX;
-          nuevaPosicionY = event.changedTouches[0].pageY - correccionY;
-        }
-        // Guarda la linea
-        guardarLinea();
-        // Redibuja todas las lineas guardadas
-        ctx.beginPath();
-        lineas.forEach(function(segmento) {
-          ctx.moveTo(segmento[0].x, segmento[0].y);
-          segmento.forEach(function(punto, index) {
-            ctx.lineTo(punto.x, punto.y);
-          });
-        });
-        ctx.stroke();
-      }
-    }
-
-    /**
-     * Funcion que deja de dibujar la linea
-     */
-    function pararDibujar() {
-      pintarLinea = false;
-      guardarLinea();
-    }
-
-    //======================================================================
-    // EVENTOS
-    //======================================================================
-    // Eventos pantallas táctiles
-    miCanvas.addEventListener("touchstart", empezarDibujo, false);
-    miCanvas.addEventListener("touchmove", dibujarLinea, false);
   </script>
 </body>
 
