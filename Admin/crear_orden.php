@@ -1,12 +1,12 @@
 <?php
 include 'php/conexion.php';
-$sql = "SELECT * FROM trabajador";
+$sql = "SELECT * FROM clientes";
 $result = mysqli_query($conexion, $sql);
-$sql2 = "SELECT * FROM clientes";
+$sql2 = "SELECT * FROM mercancia";
 $result2 = mysqli_query($conexion, $sql2);
 $sql3 = "SELECT * FROM presentacion_mercancia";
 $result3 = mysqli_query($conexion, $sql3);
-$sql4 = "SELECT * FROM tipo_mercancia";
+$sql4 = "SELECT * FROM mercancia";
 $result4 = mysqli_query($conexion, $sql4);
 $sql5 = "SELECT * FROM tipo_operacion";
 $result5 = mysqli_query($conexion, $sql5);
@@ -38,7 +38,7 @@ $result6 = mysqli_query($conexion, $sql6);
                     <select class="form-control" name='cliente'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      while ($Row1 = mysqli_fetch_array($result)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
@@ -66,7 +66,7 @@ $result6 = mysqli_query($conexion, $sql6);
                     <select class="form-control" name='mercancia'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result4)) {
+                      while ($Row1 = mysqli_fetch_array($result2)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
