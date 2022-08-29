@@ -1,9 +1,17 @@
 <?php
 include 'php/conexion.php';
-$sql = "SELECT * FROM trabajador";
+$sql = "SELECT * FROM tipo_servicio";
 $result = mysqli_query($conexion, $sql);
-$sql2 = "SELECT * FROM unidades";
+$sql2 = "SELECT * FROM tipo_carga";
 $result2 = mysqli_query($conexion, $sql2);
+$sql3 = "SELECT * FROM trabajador";
+$result3 = mysqli_query($conexion, $sql3);
+$sql4 = "SELECT * FROM terminales";
+$result4 = mysqli_query($conexion, $sql4);
+$sql5 = "SELECT * FROM tipo_operacion";
+$result5 = mysqli_query($conexion, $sql5);
+$sql6 = "SELECT * FROM tipo_contenedor";
+$result6 = mysqli_query($conexion, $sql6);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +31,7 @@ $result2 = mysqli_query($conexion, $sql2);
           <!--  DATE PICKERS -->
           <div class="col-lg-12">
             <div class="form-panel">
-              <form  class="form-horizontal style-form" >
+              <form class="form-horizontal style-form" id="formViajeLocal" enctype="multipart/form-data">
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">
@@ -63,9 +71,9 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='tipo_servicio'>
                       <option value="0">-</option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      while ($Row1 = mysqli_fetch_array($result)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -80,7 +88,7 @@ $result2 = mysqli_query($conexion, $sql2);
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -93,9 +101,9 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='tipo_contenedor'>
                       <option value="0">-</option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      while ($Row1 = mysqli_fetch_array($result6)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -116,9 +124,9 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='operador'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      while ($Row1 = mysqli_fetch_array($result3)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -148,9 +156,9 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='terminal_carga'>
                       <option value="0">-</option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result2)) {
+                      while ($Row1 = mysqli_fetch_array($result4)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -178,7 +186,7 @@ $result2 = mysqli_query($conexion, $sql2);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Patio de destino</label>
                   <div class="col-sm-4">
-                    <input type="text" name='transportista' class="form-control">
+                    <input type="text" name='patio_destino' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
@@ -194,7 +202,7 @@ $result2 = mysqli_query($conexion, $sql2);
                       <span class="btn btn-theme02 btn-file">
                         <span class="fileupload-new"><i class="fa fa-paperclip"></i> Selecciona un archivo</span>
                         <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
-                        <input type="file" class="default" name="eir"/>
+                        <input type="file" class="default" name="eir" />
                       </span>
                       <span class="fileupload-preview" style="margin-left:5px;"></span>
                       <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
@@ -261,6 +269,77 @@ $result2 = mysqli_query($conexion, $sql2);
   <script type="text/javascript" src="../assets/lib/bootstrap-daterangepicker/moment.min.js"></script>
   <script type="text/javascript" src="../assets/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script src="../assets/lib/advanced-form-components.js"></script>
+  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document
+        .getElementById("formViajeLocal")
+        .addEventListener("submit", formViajeLocal);
+    });
+    async function formViajeLocal(e) {
+      e.preventDefault();
+      var form = document.getElementById("formViajeLocal");
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Estas seguro que la información es la correcta?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, agregar actividad",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            let data = new FormData(form);
+            data.append("accion", "agregar_viajelocal");
+            fetch("php/viajes_controller.php", {
+                method: "POST",
+                body: data,
+              })
+              .then((result) => result.text())
+              .then((result) => {
+                if (result == 1) {  
+                  swalWithBootstrapButtons.fire(
+                    "Agregado!",
+                    "La actividad ha sido agregado en la base de datos.",
+                    "success"
+                  );
+                  form.reset();
+                  setTimeout(function() {
+                    location.reload();
+                  }, 2000);
+                } else {
+                  swalWithBootstrapButtons.fire(
+                    "Error",
+                    "Hemos tenido un error a la base de datos o la conexión.",
+                    "error"
+                  );
+                  // form.reset();
+                  // setTimeout(function() {
+                  //     location.reload();
+                  // }, 2000);
+                }
+              });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelado",
+              "Revise su información de nuevo",
+              "error"
+            );
+          }
+        });
+    }
+  </script>
 
 </body>
 
