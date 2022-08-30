@@ -32,18 +32,11 @@ $result6 = mysqli_query($conexion, $sql6);
           <div class="col-lg-12">
             <div class="form-panel">
               <form class="form-horizontal style-form" id="formViajeForaneo" enctype="multipart/form-data">
-
-
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">
-                    <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="01-01-2014" class="input-append date dpYears">
-                      <input type="text" readonly="" value="01-01-2022" size="16" name='fecha' class="form-control">
-                      <span class="input-group-btn add-on">
-                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
-                      </span>
-                    </div>
-                    <span class="help-block">Select date</span>
+                    <input class="form-control form-control-inline" size="16" type="date" name="fecha">
+                    <span class="help-block">Selecciona una fecha</span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -70,7 +63,7 @@ $result6 = mysqli_query($conexion, $sql6);
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de servicio</label>
                   <div class="col-sm-4">
                     <select class="form-control" name='tipo_servicio'>
-                      <option value="0"></option>
+                      <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result)) {
                       ?>
@@ -85,7 +78,7 @@ $result6 = mysqli_query($conexion, $sql6);
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de carga</label>
                   <div class="col-sm-4">
                     <select class="form-control" name='tipo_carga'>
-                      <option value="0"></option>
+                      <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
                       ?>
@@ -100,7 +93,7 @@ $result6 = mysqli_query($conexion, $sql6);
                   <label class="col-sm-2 col-sm-2 control-label">Tipo de contenedor</label>
                   <div class="col-sm-4">
                     <select class="form-control" name='tipo_contenedor'>
-                      <option value="0"></option>
+                      <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result6)) {
                       ?>
@@ -123,7 +116,7 @@ $result6 = mysqli_query($conexion, $sql6);
                   </label>
                   <div class="col-sm-4">
                     <select class="form-control" name='operador'>
-                      <option value="0"></option>
+                      <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result3)) {
                       ?>
@@ -155,7 +148,7 @@ $result6 = mysqli_query($conexion, $sql6);
                   </label>
                   <div class="col-sm-4">
                     <select class="form-control" name='terminal_carga'>
-                      <option value="0"></option>
+                      <option value="0">-</option>
                       <?php
                       while ($Row1 = mysqli_fetch_array($result4)) {
                       ?>
@@ -187,7 +180,7 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Destino</label>
                   <div class="col-sm-4">
-                    <input type="text" name='destino' class="form-control">
+                    <input type="text" name='patio_destino' class="form-control">
                   </div>
                 </div>
                 <div class="form-group">
@@ -210,7 +203,7 @@ $result6 = mysqli_query($conexion, $sql6);
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
                   <label class="control-label col-md-3">Subir Carta instrucción</label>
                   <div class="controls col-md-9">
@@ -229,9 +222,9 @@ $result6 = mysqli_query($conexion, $sql6);
                   <label class="control-label col-md-3">Estadías</label>
                   <div class="col-md-4">
                     <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                      <input type="text" class="form-control dpd1" name="inicio_estadias">
-                      <span class="input-group-addon">To</span>
-                      <input type="text" class="form-control dpd2" name="termino_estadias">
+                      <input type="date" class="form-control" name="inicio_estadias">
+                      <span class="input-group-addon">Hasta</span>
+                      <input type="date" class="form-control" name="termino_estadias">
                     </div>
                     <span class="help-block">Select date range</span>
                   </div>

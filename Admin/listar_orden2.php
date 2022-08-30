@@ -13,7 +13,7 @@ include 'php/conexion.php';
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Bitacora de Entradas y Salidas</h3>
+        <h3><i class="fa fa-angle-right"></i> Bitacora de viajes locales</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
@@ -21,29 +21,20 @@ include 'php/conexion.php';
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                   <tr>
-
-                    <th>Fecha</th>
-                    <th>Hora Comienzo</th>
-                    <th class="hidden-phone">Hora Final</th>
-                    <th class="hidden-phone">No. Formato</th>
-                    <th class="hidden-phone">Unidad</th>
-                    <th class="hidden-phone">Conductor</th>
-                    <th class="hidden-phone">No. Lote</th>
+                    <th>Unidad</th>
+                    <th>Carga</th>
+                    <th class="hidden-phone">Operador</th>
+                    <th class="hidden-phone">Terminal de Carga</th>
                     <th class="hidden-phone">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM mercancia";
+                  $sql = "SELECT * FROM viajes_locales";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
                     <tr>
-
-                      <td><?php echo $mostrar['fecha'] ?></td>
-                      <td><?php echo $mostrar['hora_comienzo'] ?></td>
-                      <td><?php echo $mostrar['hora_final'] ?></td>
-                      <td><?php echo $mostrar['no_formato'] ?></td>
                       <td><?php
 
 
@@ -51,6 +42,16 @@ include 'php/conexion.php';
                           $result1 = mysqli_query($conexion, $sql1);
                           if ($Row = mysqli_fetch_array($result1)) {
                             $nombre = $Row['modelo'];
+                          }
+                          echo $nombre;
+                          ?></td>
+                      <td><?php
+
+
+                          $sql1 = "SELECT * FROM tipo_carga WHERE id='" . $mostrar['operador'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
                           }
                           echo $nombre;
                           ?></td>
@@ -66,7 +67,7 @@ include 'php/conexion.php';
                           echo $nombre;
                           ?></td>
 
-                      <td><?php echo $mostrar['no_lote'] ?></td>
+                    
                       <td>
 
 
@@ -104,7 +105,67 @@ include 'php/conexion.php';
   <!--common script for all pages-->
   <script src="../assets/lib/common-scripts.js"></script>
   <!--script for this page-->
+  <script type="text/javascript">
+    /* Formating function for row details */
+    function fnFormatDetails(oTable, nTr) {
+      var aData = oTable.fnGetData(nTr);
+      var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+      sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+      sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+      sOut += '</table>';
 
+      return sOut;
+    }
+
+    $(document).ready(function() {
+      /*
+       * Insert a 'details' column to the table
+       */
+      var nCloneTh = document.createElement('th');
+      var nCloneTd = document.createElement('td');
+      nCloneTd.innerHTML = '<img src="../assets/lib/advanced-datatable/images/details_open.png">';
+      nCloneTd.className = "center";
+
+      $('#hidden-table-info thead tr').each(function() {
+        this.insertBefore(nCloneTh, this.childNodes[0]);
+      });
+
+      $('#hidden-table-info tbody tr').each(function() {
+        this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+      });
+
+      /*
+       * Initialse DataTables, with no sorting on the 'details' column
+       */
+      var oTable = $('#hidden-table-info').dataTable({
+        "aoColumnDefs": [{
+          "bSortable": false,
+          "aTargets": [0]
+        }],
+        "aaSorting": [
+          [1, 'asc']
+        ]
+      });
+
+      /* Add event listener for opening and closing details
+       * Note that the indicator for showing which row is open is not controlled by DataTables,
+       * rather it is done here
+       */
+      $('#hidden-table-info tbody td img').live('click', function() {
+        var nTr = $(this).parents('tr')[0];
+        if (oTable.fnIsOpen(nTr)) {
+          /* This row is already open - close it */
+          this.src = "../assets/lib/advanced-datatable/images/details_open.png";
+          oTable.fnClose(nTr);
+        } else {
+          /* Open this row */
+          this.src = "../assets/lib/advanced-datatable/images/details_close.png";
+          oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

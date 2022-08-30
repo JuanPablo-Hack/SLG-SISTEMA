@@ -12,6 +12,8 @@ $sql5 = "SELECT * FROM tipo_operacion";
 $result5 = mysqli_query($conexion, $sql5);
 $sql6 = "SELECT * FROM tipo_contenedor";
 $result6 = mysqli_query($conexion, $sql6);
+$sql7 = "SELECT * FROM unidades";
+$result7 = mysqli_query($conexion, $sql7);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +41,6 @@ $result6 = mysqli_query($conexion, $sql6);
                     <span class="help-block">Selecciona una fecha</span>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo unidad</label>
                   <div class="col-sm-4">
@@ -55,8 +56,13 @@ $result6 = mysqli_query($conexion, $sql6);
                   <div class="col-sm-4">
                     <select class="form-control" name='unidad'>
                       <option value="0">-</option>
-                      <option value="1">Propias</option>
-                      <option value="2">Proveedor</option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result7)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                      <?php
+                      }
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -205,14 +211,17 @@ $result6 = mysqli_query($conexion, $sql6);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3">Estadías</label>
-                  <div class="col-md-4">
-                    <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                      <input type="text" class="form-control dpd1" name="inicio_estadias">
-                      <span class="input-group-addon">To</span>
-                      <input type="text" class="form-control dpd2" name="termino_estadias">
-                    </div>
-                    <span class="help-block">Select date range</span>
+                  <label class="control-label col-md-3">Fecha de inicio servicio</label>
+                  <div class="col-md-3 col-xs-11">
+                    <input class="form-control form-control-inline" size="16" type="date" name="inicio_estadias">
+                    <span class="help-block">Selecciona una fecha</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Fecha de inicio servicio</label>
+                  <div class="col-md-3 col-xs-11">
+                    <input class="form-control form-control-inline" size="16" type="date" name="termino_estadias">
+                    <span class="help-block">Selecciona una fecha</span>
                   </div>
                 </div>
                 <div class="form-group">
