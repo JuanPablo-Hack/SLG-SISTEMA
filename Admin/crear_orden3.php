@@ -35,13 +35,8 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">
-                    <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="01-01-2014" class="input-append date dpYears">
-                      <input type="text" readonly="" value="01-01-2014" size="16" name='fecha' class="form-control">
-                      <span class="input-group-btn add-on">
-                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
-                      </span>
-                    </div>
-                    <span class="help-block">Select date</span>
+                    <input class="form-control form-control-inline" size="16" type="date" name="fecha">
+                    <span class="help-block">Selecciona una fecha</span>
                   </div>
                 </div>
 
@@ -305,7 +300,7 @@ $result6 = mysqli_query($conexion, $sql6);
               })
               .then((result) => result.text())
               .then((result) => {
-                if (result == 1) {  
+                if (result == 1) {
                   swalWithBootstrapButtons.fire(
                     "Agregado!",
                     "La actividad ha sido agregado en la base de datos.",

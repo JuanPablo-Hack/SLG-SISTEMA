@@ -13,7 +13,7 @@ include 'php/conexion.php';
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Bitacora de Viajes</h3>
+        <h3><i class="fa fa-angle-right"></i> Bitacora de mercancia</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
@@ -21,63 +21,54 @@ include 'php/conexion.php';
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                   <tr>
-
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th class="hidden-phone">Unidad</th>
-                    <th class="hidden-phone">Placas</th>
-                    <th class="hidden-phone">Operador</th>
-                    <th class="hidden-phone">No. Viaje</th>
+                    <th>Cliente</th>
+                    <th>Cantidad</th>
+                    <th class="hidden-phone">Mercancia</th>
+                    <th class="hidden-phone">Presentación</th>
                     <th class="hidden-phone">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM viajes";
+                  $sql = "SELECT * FROM ingreso_almacen";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
                     <tr>
-
-                      <td><?php echo $mostrar['fecha'] ?></td>
-                      <td><?php echo $mostrar['hora'] ?></td>
                       <td><?php
 
 
-                          $sql1 = "SELECT * FROM unidades WHERE id='" . $mostrar['unidad'] . "'";
-                          $result1 = mysqli_query($conexion, $sql1);
-                          if ($Row = mysqli_fetch_array($result1)) {
-                            $nombre = $Row['modelo'];
-                          }
-                          echo $nombre;
-                          ?></td>
-                      <td><?php
-
-
-                          $sql1 = "SELECT * FROM unidades WHERE id='" . $mostrar['unidad'] . "'";
-                          $result1 = mysqli_query($conexion, $sql1);
-                          if ($Row = mysqli_fetch_array($result1)) {
-                            $nombre = $Row['placas'];
-                          }
-                          echo $nombre;
-                          ?></td>
-                      <td><?php
-
-
-                          $sql1 = "SELECT * FROM trabajador WHERE id='" . $mostrar['operador'] . "'";
+                          $sql1 = "SELECT * FROM clientes WHERE id='" . $mostrar['id_cliente'] . "'";
                           $result1 = mysqli_query($conexion, $sql1);
                           if ($Row = mysqli_fetch_array($result1)) {
                             $nombre = $Row['nombre'];
                           }
                           echo $nombre;
                           ?></td>
-                      <td><?php echo $mostrar['no_viaje'] ?></td>
+                      <td><?php echo $mostrar['cantidad'] ?></td>
+                      <td><?php
+
+
+                          $sql1 = "SELECT * FROM mercancia WHERE id='" . $mostrar['id_tipo_mercancia'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
+                          }
+                          echo $nombre;
+                          ?></td>
+                      <td><?php
+
+
+                          $sql1 = "SELECT * FROM presentacion_mercancia WHERE id='" . $mostrar['id_presentacion_mercancia'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
+                          }
+                          echo $nombre;
+                          ?></td>
+
 
                       <td>
-
-
-                        <a href='./orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-success btn-xs"><i class="fa fa-plus-circle"></i></a>
-
                         <a href='./editar_orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                         <a href='./eliminar_orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
 
@@ -114,7 +105,65 @@ include 'php/conexion.php';
   <!--common script for all pages-->
   <script src="../assets/lib/common-scripts.js"></script>
   <!--script for this page-->
+  <script type="text/javascript">
+    /* Formating function for row details */
+    function fnFormatDetails(oTable, nTr) {
+      var aData = oTable.fnGetData(nTr);
+      var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+      sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+      sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+      sOut += '</table>';
 
-</body
+      return sOut;
+    }
 
-</html>
+    $(document).ready(function() {
+      /*
+       * Insert a 'details' column to the table
+       */
+      var nCloneTh = document.createElement('th');
+      var nCloneTd = document.createElement('td');
+      nCloneTd.innerHTML = '<img src="../assets/lib/advanced-datatable/images/details_open.png">';
+      nCloneTd.className = "center";
+
+      $('#hidden-table-info thead tr').each(function() {
+        this.insertBefore(nCloneTh, this.childNodes[0]);
+      });
+
+      $('#hidden-table-info tbody tr').each(function() {
+        this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+      });
+
+      /*
+       * Initialse DataTables, with no sorting on the 'details' column
+       */
+      var oTable = $('#hidden-table-info').dataTable({
+        "aoColumnDefs": [{
+          "bSortable": false,
+          "aTargets": [0]
+        }],
+        "aaSorting": [
+          [1, 'asc']
+        ]
+      });
+
+      /* Add event listener for opening and closing details
+       * Note that the indicator for showing which row is open is not controlled by DataTables,
+       * rather it is done here
+       */
+      $('#hidden-table-info tbody td img').live('click', function() {
+        var nTr = $(this).parents('tr')[0];
+        if (oTable.fnIsOpen(nTr)) {
+          /* This row is already open - close it */
+          this.src = "../assets/lib/advanced-datatable/images/details_open.png";
+          oTable.fnClose(nTr);
+        } else {
+          /* Open this row */
+          this.src = "../assets/lib/advanced-datatable/images/details_close.png";
+          oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+        }
+      });
+    });
+  </script>
+</body </html>

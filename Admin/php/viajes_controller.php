@@ -21,14 +21,15 @@ switch ($_POST['accion']) {
 }
 function agregar_viajelocal($fecha, $tipo_unidad, $unidad, $tipo_servicio, $tipo_carga, $tipo_contenedor, $no_caja, $operador, $dec, $terminal_carga, $p_neto, $p_tara, $p_bruto, $naviera, $eir, $inicio_estadias, $termino_estadias)
 {
-    // include 'conexion.php';
-    // $sql = "INSERT INTO actividad (id_clasificacion, id_categoria, nombre) VALUES ('$clasi','$cat','$descrip');";
-    // $resultado = $conexion->query($sql);
-    // if ($resultado) {
-    //     echo 1;
-    // } else {
-    //     echo 2;
-    // }
+    include 'conexion.php';
+    subir_imagenes_viajes_locales($fecha);
+    $sql = "INSERT INTO `viajes_locales` (`fecha`, `id_tipo_unidad`, `id_tipo_servicio`, `id_tipo_carga`, `id_tipo_contenedor`, `no_contenedores`, `operador`, `dec`, `terminal`, `peso_neto`, `peso_tara`, `peso_bruto`, `destino`, `naviera`, `eir`, `inicio_estadias`, `fin_estadias`) VALUES ('$fecha', '$tipo_unidad', '$unidad', '$tipo_servicio', '$tipo_carga', '$tipo_contenedor', '$no_caja', '$operador', '$dec', '$p_neto', '$p_tara', '$p_bruto', '$naviera', '$eir', 'asdgay8dgasy8', '$inicio_estadias', '$termino_estadias');";
+    $resultado = $conexion->query($sql);
+    if ($resultado) {
+        echo 1;
+    } else {
+        echo 2;
+    }
 }
 function agregar_viajeforaneo($fecha, $tipo_unidad, $unidad, $tipo_servicio, $tipo_carga, $tipo_contenedor, $no_caja, $operador, $dec, $terminal_carga, $p_neto, $p_tara, $p_bruto, $naviera, $eir, $instruccion, $inicio_estadias, $termino_estadias, $combustible, $viaticos, $casetas)
 {
@@ -88,4 +89,20 @@ function eliminar_viajeforaneo($id)
     // } else {
     //     echo 1;
     // }
+}
+
+function subir_imagenes_viajes_locales($carpeta)
+{
+
+    $ruta_manifiestos = '../../viajes/locales/';
+    $ruta_manifiestos_cliente = $ruta_manifiestos . $carpeta . "/";
+
+    if (!file_exists($ruta_manifiestos)) {
+        mkdir($ruta_manifiestos_cliente, 0777, true);
+    }
+    if (!file_exists($ruta_manifiestos_cliente)) {
+        mkdir($ruta_manifiestos_cliente, 0777, true);
+    }
+    move_uploaded_file($_FILES['dec']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['dec']['name']);
+    move_uploaded_file($_FILES['eir']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['eir']['name']);
 }

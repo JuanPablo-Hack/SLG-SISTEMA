@@ -15,20 +15,23 @@ switch ($_POST['accion']) {
 }
 function agregar_material($cliente, $fecha, $hora, $mercancia, $presentacion_mercancia, $pedimento, $tipo_operacion, $transportista, $operador, $placas_tracto, $placas_remolque, $no_caja, $tipo_contenedor, $no_sello, $nombre_producto, $cantidad, $descripcion, $firma_operador, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6)
 {
-    echo "Todo bien procedemos a guardar";
-    // include 'conexion.php';
-    // $sql = "INSERT INTO actividad (id_clasificacion, id_categoria, nombre) VALUES ('$clasi','$cat','$descrip');";
-    // $resultado = $conexion->query($sql);
-    // if ($resultado) {
-    //     echo 1;
-    // } else {
-    //     echo 2;
-    // }
+    include 'conexion.php';
+    $nombreImagenGuardada = decodificarImagen($firma_operador);
+    subir_imagenes_ingreso($nombre_producto);
+    $sql = "INSERT INTO `ingreso_almacen` (`id_cliente`, `fecha`, `hora`, `id_tipo_mercancia`, `id_presentacion_mercancia`, `no_pedimento`, `id_tipo_operacion`, `transportista`, `operador`, `no_placas_tracto`, `no_placas_remolque`, `no_caja`, `id_tipo_contenedor`, `sello`, `nombre`, `cantidad`, `descripcion`, `firma_supervisor`, `foto1`, `foto2`, `foto3`, `foto4`, `foto5`, `foto6`) VALUES ('$cliente', '$fecha', '$hora', '$mercancia', '$presentacion_mercancia', '$pedimento', '$tipo_operacion', '$transportista', '$operador', '$placas_tracto', '$placas_remolque', '$no_caja', '$tipo_contenedor', '$no_sello', '$nombre_producto', '$cantidad', '$descripcion', '$nombreImagenGuardada', '$foto1', '$foto2', '$foto3', '$foto4', '$foto5', '$foto6');";
+    $resultado = $conexion->query($sql);
+    if ($resultado) {
+        echo 1;
+    } else {
+        echo 2;
+    }
 }
 function editar_material($id, $cliente, $fecha, $hora, $mercancia, $presentacion_mercancia, $pedimento, $tipo_operacion, $transportista, $operador, $placas_tracto, $placas_remolque, $no_caja, $tipo_contenedor, $no_sello, $nombre_producto, $cantidad, $descripcion, $firma_operador, $firma_supervisor)
 {
 
     // include 'conexion.php';
+    // $nombreImagenGuardada = decodificarImagen($firma_operador);
+    // subir_imagenes_confirmar_imagen($nombre_producto);
     // $sql = "UPDATE actividad SET id_clasificacion='$clasi', id_categoria='$cat', nombre='$descrip' WHERE id='$id'";
     // $resultado = $conexion->query($sql);
     // if ($resultado) {
@@ -39,15 +42,17 @@ function editar_material($id, $cliente, $fecha, $hora, $mercancia, $presentacion
 }
 function salida_material($id, $transportista, $operador, $placas_tracto, $placas_remolque, $no_caja, $tipo_contenedor, $no_sello, $cantidad, $unidad, $firma_operador, $foto1, $foto2, $foto3, $foto4, $foto5, $foto6)
 {
-    echo "Se hará la salida";
-    // include 'conexion.php';
-    // $sql = "UPDATE actividad SET id_clasificacion='$clasi', id_categoria='$cat', nombre='$descrip' WHERE id='$id'";
-    // $resultado = $conexion->query($sql);
-    // if ($resultado) {
-    //     echo 1;
-    // } else {
-    //     echo 2;
-    // }
+
+    include 'conexion.php';
+    $nombreImagenGuardada = decodificarImagen($firma_operador);
+    subir_imagenes_salida($id);
+    $sql = "INSERT INTO `salidas_almacen` (`id_mercancia`, `transportista`, `operador`, `placas_tracto`, `placas_remolque`, `no_caja`, `tipo_contenedor`, `no_sello`, `cantidad`, `descripcion`, `firma_supervisor`, `foto1`, `foto2`, `foto3`, `foto4`, `foto5`, `foto6`) VALUES ('$id', '$transportista', '$operador', '$placas_tracto', '$placas_remolque', '$no_caja', '$tipo_contenedor', '$no_sello', '$cantidad', 'Test tengo que cambiar esto', '$nombreImagenGuardada', '$foto1', '$foto2', '$foto3', '$foto4', '$foto5', '$foto6')";
+    $resultado = $conexion->query($sql);
+    if ($resultado) {
+        echo 1;
+    } else {
+        echo 2;
+    }
 }
 function eliminar_material($id)
 {
@@ -59,4 +64,56 @@ function eliminar_material($id)
     } else {
         echo 1;
     }
+}
+
+function decodificarImagen($imagenCodificada)
+{
+    $imagenCodificadaLimpia = str_replace("data:image/png;base64,", "", $imagenCodificada);
+    $imagenDecodificada = base64_decode($imagenCodificadaLimpia);
+    $nombreImagenGuardada = "imagen_" . uniqid() . ".png";
+    $ruta = '../../firmas/';
+    $ruta_firma = $ruta . $nombreImagenGuardada;
+    if (!file_exists($ruta)) {
+        mkdir($ruta, 0777, true);
+    }
+    file_put_contents($ruta_firma, $imagenDecodificada);
+    return $nombreImagenGuardada;
+}
+function subir_imagenes_ingreso($carpeta)
+{
+
+    $ruta_manifiestos = '../../material/ingresos/';
+    $ruta_manifiestos_cliente = $ruta_manifiestos . $carpeta . "/";
+
+    if (!file_exists($ruta_manifiestos)) {
+        mkdir($ruta_manifiestos_cliente, 0777, true);
+    }
+    if (!file_exists($ruta_manifiestos_cliente)) {
+        mkdir($ruta_manifiestos_cliente, 0777, true);
+    }
+    move_uploaded_file($_FILES['foto1']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto1']['name']);
+    move_uploaded_file($_FILES['foto2']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto2']['name']);
+    move_uploaded_file($_FILES['foto3']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto3']['name']);
+    move_uploaded_file($_FILES['foto4']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto4']['name']);
+    move_uploaded_file($_FILES['foto5']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto3']['name']);
+    move_uploaded_file($_FILES['foto6']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto4']['name']);
+}
+function subir_imagenes_salida($carpeta)
+{
+
+    $ruta_manifiestos = '../../material/salidas/';
+    $ruta_manifiestos_cliente = $ruta_manifiestos . $carpeta . "/";
+
+    if (!file_exists($ruta_manifiestos)) {
+        mkdir($ruta_manifiestos_cliente, 0777, true);
+    }
+    if (!file_exists($ruta_manifiestos_cliente)) {
+        mkdir($ruta_manifiestos_cliente, 0777, true);
+    }
+    move_uploaded_file($_FILES['foto1']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto1']['name']);
+    move_uploaded_file($_FILES['foto2']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto2']['name']);
+    move_uploaded_file($_FILES['foto3']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto3']['name']);
+    move_uploaded_file($_FILES['foto4']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto4']['name']);
+    move_uploaded_file($_FILES['foto5']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto3']['name']);
+    move_uploaded_file($_FILES['foto6']['tmp_name'], $ruta_manifiestos_cliente . $_FILES['foto4']['name']);
 }
