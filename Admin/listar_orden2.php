@@ -26,7 +26,21 @@ include 'php/conexion.php';
                     <th class="hidden-phone">Operador</th>
                     <th class="hidden-phone">Terminal de Carga</th>
                     <th class="hidden-phone">Acciones</th>
-                    
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -77,7 +91,57 @@ include 'php/conexion.php';
                           }
                           echo $nombre;
                           ?></td>
+                      <td style="display: none;"><?php
 
+
+                                                  $sql1 = "SELECT * FROM tipo_servicio WHERE id='" . $mostrar['id_tipo_servicio'] . "'";
+                                                  $result1 = mysqli_query($conexion, $sql1);
+                                                  if ($Row = mysqli_fetch_array($result1)) {
+                                                    $nombre = $Row['nombre'];
+                                                  }
+                                                  echo $nombre;
+                                                  ?></td>
+                      <td style="display: none;"><?php
+
+
+                                                  $sql1 = "SELECT * FROM tipo_carga WHERE id='" . $mostrar['id_tipo_carga'] . "'";
+                                                  $result1 = mysqli_query($conexion, $sql1);
+                                                  if ($Row = mysqli_fetch_array($result1)) {
+                                                    $nombre = $Row['nombre'];
+                                                  }
+                                                  echo $nombre;
+                                                  ?></td>
+                      <td style="display: none;"><?php
+
+
+                                                  $sql1 = "SELECT * FROM tipo_contenedor WHERE id='" . $mostrar['id_tipo_contenedor'] . "'";
+                                                  $result1 = mysqli_query($conexion, $sql1);
+                                                  if ($Row = mysqli_fetch_array($result1)) {
+                                                    $nombre = $Row['nombre'];
+                                                  }
+                                                  echo $nombre;
+                                                  ?></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"><?php
+
+
+                                                  $sql1 = "SELECT * FROM trabajador WHERE id='" . $mostrar['operador'] . "'";
+                                                  $result1 = mysqli_query($conexion, $sql1);
+                                                  if ($Row = mysqli_fetch_array($result1)) {
+                                                    $nombre = $Row['modelo'];
+                                                  }
+                                                  echo $nombre;
+                                                  ?></td>
+                      <td style="display: none;"><?php echo $mostrar['dec'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['peso_neto'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['peso_tara'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['peso_bruto'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['destino'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['naviera'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['eir'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['inicio_estadias'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['fin_estadias'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['fecha'] ?></td>
                       <td>
 
 
@@ -120,9 +184,26 @@ include 'php/conexion.php';
     function fnFormatDetails(oTable, nTr) {
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
-      sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
-      sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+      sOut += '<tr><td>Fecha:</td><td>' + aData[19] + '</td></tr>';
+      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[5g] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + '</td></tr>';
       sOut += '</table>';
 
       return sOut;
