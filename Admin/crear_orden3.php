@@ -44,7 +44,7 @@ $result7 = mysqli_query($conexion, $sql7);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo unidad</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='tipo_unidad'>
+                    <select class="form-control" name='tipo_unidad' id="filtro_unidad">
                       <option value="0">-</option>
                       <option value="1">Propias</option>
                       <option value="2">Proveedor</option>
@@ -54,16 +54,7 @@ $result7 = mysqli_query($conexion, $sql7);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Unidad Asignada</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
-                      <option value="0">-</option>
-                      <?php
-                      while ($Row1 = mysqli_fetch_array($result7)) {
-                      ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
+                    <select class="form-control" name='unidad' id="unidades"></select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -274,6 +265,20 @@ $result7 = mysqli_query($conexion, $sql7);
   <script type="text/javascript" src="../assets/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script src="../assets/lib/advanced-form-components.js"></script>
   <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#filtro_unidad").change(function() {
+        $("#filtro_unidad option:selected").each(function() {
+          id_tipo = $(this).val();
+          $.post("php/unidades.php", {
+            id_tipo: id_tipo
+          }, function(data) {
+            $("#unidades").html(data);
+          });
+        });
+      })
+    });
+  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       document

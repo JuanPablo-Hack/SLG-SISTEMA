@@ -2,7 +2,7 @@
 include 'php/conexion.php';
 $sql = "SELECT * FROM tipo_contenedor";
 $result = mysqli_query($conexion, $sql);
-$sql2 = "SELECT * FROM unidades";
+$sql2 = "SELECT * FROM ingreso_almacen";
 $result2 = mysqli_query($conexion, $sql2);
 ?>
 <!DOCTYPE html>

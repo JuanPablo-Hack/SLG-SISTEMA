@@ -26,6 +26,25 @@ include 'php/conexion.php';
                     <th class="hidden-phone">Mercancia</th>
                     <th class="hidden-phone">Presentación</th>
                     <th class="hidden-phone">Acciones</th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -66,12 +85,28 @@ include 'php/conexion.php';
                           }
                           echo $nombre;
                           ?></td>
-
-
+                      <td style="display: none;"><?php echo $mostrar['fecha'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['hora'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_pedimento'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['transportista'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['operador'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_placas_tracto'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_placas_remolque'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_caja'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['sello'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['nombre'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['cantidad'] ?></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
                       <td>
                         <a href='./editar_orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                         <a href='./eliminar_orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
-
                       </td>
                     </tr>
                   <?php
@@ -110,9 +145,23 @@ include 'php/conexion.php';
     function fnFormatDetails(oTable, nTr) {
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
-      sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
-      sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+      sOut += '<tr><td>Nombre del Cliente:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Fecha de Ingreso:</td><td>' + aData[5] + '</td></tr>';
+      sOut += '<tr><td>Hora:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Tipo de mercancia:</td><td>' + aData[3] + '</td></tr>';
+      sOut += '<tr><td>Presentación:</td><td>' + aData[4] + '</td></tr>';
+      sOut += '<tr><td>Pedimento:</td><td>' + aData[7] + '</td></tr>';
+      sOut += '<tr><td>Tipo de operacion:</td><td>' + aData[8] + '</td></tr>';
+      sOut += '<tr><td>Transportista:</td><td>' + aData[9] + '</td></tr>';
+      sOut += '<tr><td>Operador:</td><td>' + aData[10] + '</td></tr>';
+      sOut += '<tr><td>No. Placas Tracto:</td><td>' + aData[11] + '</td></tr>';
+      sOut += '<tr><td>No. Placas Remolque:</td><td>' + aData[12] + '</td></tr>';
+      sOut += '<tr><td>No. Caja:</td><td>' + aData[13] + '</td></tr>';
+      sOut += '<tr><td>Sello:</td><td>' + aData[14] + '</td></tr>';
+      sOut += '<tr><td>Nombre:</td><td>' + aData[15] + '</td></tr>';
+      sOut += '<tr><td>Cantidad:</td><td>' + aData[2] + '</td></tr>';
+      sOut += '<tr><td>Descripción:</td><td>' + aData[14] + '</td></tr>';
+      sOut += '<tr><td>Firma de Supervisor:</td><td><a href="../firmas/' + aData[16] + '" target="_blank" rel="noopener noreferrer">Imagen</a></td></tr>';
       sOut += '</table>';
 
       return sOut;

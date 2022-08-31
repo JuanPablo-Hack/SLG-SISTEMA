@@ -36,7 +36,9 @@
                 </a>
                 <ul class="sub">
                     <li><a href="crear_orden.php">Ingreso de mercancia</a></li>
+                    <li><a href="listar_ingresos.php">Bitacoras de Ingresos</a></li>
                     <li><a href="crear_orden2.php">Salidas de mercancia</a></li>
+                    <li><a href="listar_salidad.php">Bitacoras de Salidas</a></li>
                     <li><a href="listar_orden.php">Bitacora de mercancia</a></li>
                 </ul>
             </li>
@@ -66,7 +68,7 @@
                     <span>Unidades</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="alta_unidad.html">Dar de alta</a></li>
+                    <li><a href="crear_unidad.php">Dar de alta</a></li>
                     <li><a href="listar_unidades.php">Mis Unidades</a></li>
                     <li><a href="alta_unidad.html">Tractocamiones y arrastres</a></li>
                     <li><a href="alta_unidad.html">Mis Tractocamiones y arrastres</a></li>

@@ -26,6 +26,7 @@ include 'php/conexion.php';
                     <th class="hidden-phone">Operador</th>
                     <th class="hidden-phone">Terminal de Carga</th>
                     <th class="hidden-phone">Acciones</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -66,8 +67,17 @@ include 'php/conexion.php';
                           }
                           echo $nombre;
                           ?></td>
+                      <td><?php
 
-                    
+
+                          $sql1 = "SELECT * FROM terminales WHERE id='" . $mostrar['terminal'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
+                          }
+                          echo $nombre;
+                          ?></td>
+
                       <td>
 
 
@@ -91,7 +101,7 @@ include 'php/conexion.php';
       </section>
       <!-- /wrapper -->
     </section>
-    <?php include("templates/footer../assets/.php"); ?>
+    <?php include("templates/footer.php"); ?>
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="../assets/lib/jquery/jquery.min.js"></script>
