@@ -25,6 +25,24 @@ include 'php/conexion.php';
                     <th>Carga</th>
                     <th class="hidden-phone">Operador</th>
                     <th class="hidden-phone">Terminal de Carga</th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th style="display: none;">
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
                     <th class="hidden-phone">Acciones</th>
                   </tr>
                 </thead>
@@ -76,6 +94,43 @@ include 'php/conexion.php';
                           }
                           echo $nombre;
                           ?></td>
+                      <td style="display: none;"><?php echo $mostrar['fecha'] ?></td>
+                      <td style="display: none;">Propia</td>
+                      <td style="display: none;"><?php
+
+
+                                                  $sql1 = "SELECT * FROM tipo_servicio WHERE id='" . $mostrar['id_tipo_servicio'] . "'";
+                                                  $result1 = mysqli_query($conexion, $sql1);
+                                                  if ($Row = mysqli_fetch_array($result1)) {
+                                                    $nombre = $Row['nombre'];
+                                                  }
+                                                  echo $nombre;
+                                                  ?></td>
+                      <td style="display: none;"><?php
+
+
+                                                  $sql1 = "SELECT * FROM tipo_contenedor WHERE id='" . $mostrar['id_tipo_contenedor'] . "'";
+                                                  $result1 = mysqli_query($conexion, $sql1);
+                                                  if ($Row = mysqli_fetch_array($result1)) {
+                                                    $nombre = $Row['nombre'];
+                                                  }
+                                                  echo $nombre;
+                                                  ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_contenedores'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['dec'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['peso_neto'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['peso_tara'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['peso_bruto'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['destino'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['naviera'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['eir'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['carta_ins'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['inicio_estadia'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['fin_estadia'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['combustible'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['viaticos'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['casetas'] ?></td>
+
 
                       <td>
 
@@ -119,9 +174,28 @@ include 'php/conexion.php';
     function fnFormatDetails(oTable, nTr) {
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-      sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
-      sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
-      sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+      sOut += '<tr><td>Fecha:</td><td>' + aData[4] + '</td></tr>';
+      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[5] + '</td></tr>';
+      sOut += '<tr><td>Unidad:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Tipo de servicio:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Tipo de carga:</td><td>' + aData[2] + '</td></tr>';
+      sOut += '<tr><td>Tipo de contenedor:</td><td>' + aData[8] + '</td></tr>';
+      sOut += '<tr><td>No.contenedores:</td><td>' + aData[9] + '</td></tr>';
+      sOut += '<tr><td>Operador:</td><td>' + aData[3] + '</td></tr>';
+      sOut += '<tr><td>DEC:</td><td>' + aData[10] + '</td></tr>';
+      sOut += '<tr><td>Terminal:</td><td>' + aData[4] + '</td></tr>';
+      sOut += '<tr><td>Peso neto:</td><td>' + aData[11] + '</td></tr>';
+      sOut += '<tr><td>Peso tara:</td><td>' + aData[12] + '</td></tr>';
+      sOut += '<tr><td>Peso bruto:</td><td>' + aData[13] + '</td></tr>';
+      sOut += '<tr><td>Destino:</td><td>' + aData[14] + '</td></tr>';
+      sOut += '<tr><td>Naviera:</td><td>' + aData[15] + '</td></tr>';
+      sOut += '<tr><td>EIR:</td><td>' + aData[16] + '</td></tr>';
+      sOut += '<tr><td>Carta de Instrucciones:</td><td>' + aData[17] + '</td></tr>';
+      sOut += '<tr><td>Fecha de inicio de estadias:</td><td>' + aData[18] + '</td></tr>';
+      sOut += '<tr><td>Fecha de termino de estadias:</td><td>' + aData[19] + '</td></tr>';
+      sOut += '<tr><td>Combustible:</td><td>' + aData[20] + '</td></tr>';
+      sOut += '<tr><td>Viaticos:</td><td>' + aData[21] + '</td></tr>';
+      sOut += '<tr><td>Casetas:</td><td>' + aData[22] + '</td></tr>';
       sOut += '</table>';
 
       return sOut;

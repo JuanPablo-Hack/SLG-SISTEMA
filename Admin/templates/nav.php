@@ -59,7 +59,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="crear_orden4.php">Crear Viaje</a></li>
-                    <li><a href="listar_orden2.php">Bitacora Viaje</a></li>
+                    <li><a href="listar_orden3.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
