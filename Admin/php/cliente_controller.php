@@ -13,7 +13,7 @@ switch ($_POST['accion']) {
 }
 function agregar_cliente($nombre, $email, $contraseña)
 {
-  echo $contraseña;
+  enviar_email($email, $contraseña);
   $hash = sha1($contraseña);
   include 'conexion.php';
   $sql = "INSERT INTO clientes (nombre, email, pwd, datos_cargados) VALUES ('$nombre','$email','$hash',0);";
@@ -59,110 +59,258 @@ function generatePassword()
   return $key;
 }
 
-//TODO: Hacer el correo electronico y mandar por correso en producción
-
 function enviar_email($correo, $new_password)
 {
   $destinatario = $correo;
-  $asunto = "Solicitud de cambio de contraseña en el portal de pagos en línea";
+  $asunto = "Creación de usuario en el sistema ERP de SLG";
   $cuerpo = ' 
-      <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-         
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </head>
-        <body style="margin: 0; padding: 0">
-          <table
-            align="center"
-            border="0"
-            cellpadding="0"
-            cellspacing="0"
-            width="600"
-          >
-            
-            <tr>
-              <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                  <tr>
-                      <td style="color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
-      
-                          <b>Tu trámite cambio de contraseña ha sido tramitado</b> <br> 
-                          
-                        </td>
-                  </tr>
-                  <hr>
-                  <tr>
-                      
-                    <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                      Por medio del presente correo le hacemos llegar la nueva contraseña para ingresar al portal de pagos en línea de CAPDAM, por eso mismo le pedimos que una vez realizado el cambio incluya usted una nueva contraseña desde el apartado de editar
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>
-                      <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                        <tr>
-                          <td width="260" valign="top">
-                            <table
-                              border="0"
-                              cellpadding="0"
-                              cellspacing="0"
-                              width="100%"
-                            >
-                             
-                              <tr>
-                                <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                  En capdam queremos brindarle el mejor servicio por eso generamos los tramítes de manera segura, en base a la ley de protección de datos personales, por lo que es importante que tenga en cuenta nuestro aviso de privacidad.
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                          <td style="font-size: 0; line-height: 0" width="20">
-                            &nbsp;
-                          </td>
-                          <td width="260" valign="top">
-                            <table
-                              border="0"
-                              cellpadding="0"
-                              cellspacing="0"
-                              width="100%"
-                            >
-                              
-                              <tr>
-                                <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                Cada tramíte es guardado en nuestra base de datos para darle el seguimiento necesario a nuestros nuevos usuarios que quieren iniciar con el servicio de agua potable, de manera que todos puedan tener acceso a la información necesaria.
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-                <center>  <h1>Su contraseña nueva es:</h1>  <strong><h2>' . $new_password . '</></h2></strong></center>
-              </td>
-            </tr>
-        
-          
-            <td bgcolor="#0F4FEC" valign="top"style="padding: 30px 30px 30px 30px">
-              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!DOCTYPE html>
+  <html
+    lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:o="urn:schemas-microsoft-com:office:office"
+  >
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <meta name="x-apple-disable-message-reformatting" />
+      <title></title>
+      <style>
+        table,
+        td,
+        div,
+        h1,
+        p {
+          font-family: Arial, sans-serif;
+        }
+        @media screen and (max-width: 530px) {
+          .unsub {
+            display: block;
+            padding: 8px;
+            margin-top: 14px;
+            border-radius: 6px;
+            background-color: #555555;
+            text-decoration: none !important;
+            font-weight: bold;
+          }
+          .col-lge {
+            max-width: 100% !important;
+          }
+        }
+        @media screen and (min-width: 531px) {
+          .col-sml {
+            max-width: 27% !important;
+          }
+          .col-lge {
+            max-width: 73% !important;
+          }
+        }
+      </style>
+    </head>
+    <body
+      style="
+        margin: 0;
+        padding: 0;
+        word-spacing: normal;
+        background-color: #ffffff;
+      "
+    >
+      <div
+        role="article"
+        aria-roledescription="email"
+        lang="en"
+        style="
+          text-size-adjust: 100%;
+          -webkit-text-size-adjust: 100%;
+          -ms-text-size-adjust: 100%;
+          background-color: #fff;
+        "
+      >
+        <table
+          role="presentation"
+          style="width: 100%; border: none; border-spacing: 0"
+        >
+          <tr>
+            <td align="center" style="padding: 0">
+              <table
+                role="presentation"
+                style="
+                  width: 94%;
+                  max-width: 600px;
+                  border: none;
+                  border-spacing: 0;
+                  text-align: left;
+                  font-family: Arial, sans-serif;
+                  font-size: 16px;
+                  line-height: 22px;
+                  color: #363636;
+                "
+              >
                 <tr>
-                  <td><td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
-      
-                      &reg; Capdam 2021<br/>
-                      
-                      <a href="#" style="color: #ffffff;"><font color="#ffffff">Click Aquí</font></a> conoce nuestro sitio web.
-                      
-                    </td></td>
+                  <td
+                    style="
+                      padding: 40px 30px 30px 30px;
+                      text-align: center;
+                      font-size: 24px;
+                      font-weight: bold;
+                    "
+                  >
+                    <a
+                      href="https://gruposoca.com.mx/"
+                      style="text-decoration: none"
+                      ><img
+                        src="../../assets/img/slg logo.png"
+                        width="165"
+                        alt="Logo"
+                        style="
+                          width: 165px;
+                          max-width: 80%;
+                          height: auto;
+                          border: none;
+                          text-decoration: none;
+                          color: #ffffff;
+                        "
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 30px; background-color: #ffffff">
+                    <h1
+                      style="
+                        margin-top: 0;
+                        margin-bottom: 16px;
+                        font-size: 26px;
+                        line-height: 32px;
+                        font-weight: bold;
+                        letter-spacing: -0.02em;
+                      "
+                    >
+                      Bienvenido al Sistema ERP de Soca Logistic Group!
+                    </h1>
+                    <p style="margin: 0">
+                      Por medio del presente correo le decimos que hemos de dado
+                      de alta sus datos de contacto y revisión para nuestro
+                      sistema con el siguiente correo,
+                      <a
+                        href="#"
+                        style="color: #ff2b06; text-decoration: underline"
+                        >' . $correo . '</a
+                      >, con el cual podrá ingresar a nuestro sistema a consultar
+                      sus viajes.
+                    </p>
+                    <center>
+                      <h1><strong>Contraseña: </strong>' . $new_password . '</h1>
+                    </center>
+                  </td>
+                </tr>
+  
+                <tr>
+                  <td
+                    style="
+                      padding: 35px 30px 11px 30px;
+                      font-size: 0;
+                      background-color: #ffffff;
+                      border-bottom: 1px solid #f0f0f5;
+                      border-color: rgba(201, 201, 207, 0.35);
+                    "
+                  >
+                    <div
+                      class="col-sml"
+                      style="
+                        display: inline-block;
+                        width: 100%;
+                        max-width: 145px;
+                        vertical-align: top;
+                        text-align: left;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        color: #363636;
+                      "
+                    ></div>
+                    <div
+                      class="col-lge"
+                      style="
+                        display: inline-block;
+                        width: 100%;
+                        max-width: 395px;
+                        vertical-align: top;
+                        padding-bottom: 20px;
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 22px;
+                        color: #363636;
+                      "
+                    >
+                      <p style="margin: 0">
+                        <a
+                          href="https://example.com/"
+                          style="
+                            background: #00aaa1;
+                            text-decoration: none;
+                            padding: 10px 25px;
+                            color: #ffffff;
+                            border-radius: 4px;
+                            display: inline-block;
+                            mso-padding-alt: 0;
+                            text-underline-color: #ff3884;
+                          "
+                          ><span style="mso-text-raise: 10pt; font-weight: bold"
+                            >Ingresar al sistema</span
+                          ></a
+                        >
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      padding: 30px;
+                      text-align: center;
+                      font-size: 12px;
+                      background-color: #ff2b06;
+                      color: #fff;
+                    "
+                  >
+                    <p style="margin: 0 0 8px 0">
+                      <a
+                        href="http://www.facebook.com/"
+                        style="text-decoration: none"
+                        ><img
+                          src="images/facebook.png"
+                          width="40"
+                          height="40"
+                          alt="f"
+                          style="display: inline-block; color: #fff"
+                      /></a>
+                      <a
+                        href="http://www.twitter.com/"
+                        style="text-decoration: none"
+                        ><img
+                          src="images/twitter.png"
+                          width="40"
+                          height="40"
+                          alt="t"
+                          style="display: inline-block; color: #fff"
+                      /></a>
+                    </p>
+                    <p style="margin: 0; font-size: 14px; line-height: 20px">
+                      &reg; Gruposoca, todos los derechos reservados 2022<br /><a
+                        class="unsub"
+                        href="http://www.example.com/"
+                        style="color: #fff; text-decoration: underline"
+                        >www.gruposoca.com.mx</a
+                      >
+                    </p>
+                  </td>
                 </tr>
               </table>
             </td>
-          </table>
-        </body>
-      </html>
-         
+          </tr>
+        </table>
+      </div>
+    </body>
+  </html>
   ';
 
   //para el envío en formato HTML 
@@ -170,7 +318,7 @@ function enviar_email($correo, $new_password)
   $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 
   //dirección del remitente 
-  $headers .= "From: Pagos en Línea CAPDAM <soporte@pagos.capdam.gob.mx>\r\n";
+  $headers .= "From: Sistema ERP SLG <sistemas@gruposoca.com.mx>\r\n";
 
 
 
