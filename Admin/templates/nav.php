@@ -82,10 +82,11 @@
                     <span>Usuarios</span>
                 </a>
                 <ul class="sub">
+                    <li><a href="alta_proveedor.php">Crear proveedores</a></li>
                     <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
-                    <li><a href="listar_trabajador.php">Lista tractocamiones</a></li>
+                    <li><a href="alta_cliente.php">Crear Clientes</a></li>
                     <li><a href="listar_trabajador.php">Listar Clientes</a></li>
-                    <li><a href="alta_trabajador.html">Crear de trabajador</a></li>
+                    <li><a href="alta_trabajador.php">Crear trabajador</a></li>
                     <li><a href="alta_trabajador.html">Lista de trabajadores</a></li>
                 </ul>
             </li>
