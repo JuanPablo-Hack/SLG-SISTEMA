@@ -101,20 +101,20 @@
                                         "La actividad ha sido agregado en la base de datos.",
                                         "success"
                                     );
-                                    // form.reset();
-                                    // setTimeout(function() {
-                                    //     location.reload();
-                                    // }, 2000);
+                                    form.reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 2000);
                                 } else {
                                     swalWithBootstrapButtons.fire(
                                         "Error",
                                         "Hemos tenido un error a la base de datos o la conexión.",
                                         "error"
                                     );
-                                    // form.reset();
-                                    // setTimeout(function() {
-                                    //     location.reload();
-                                    // }, 2000);
+                                    form.reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 2000);
                                 }
                             });
                     } else if (
