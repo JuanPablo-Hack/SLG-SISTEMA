@@ -159,7 +159,7 @@ function enviar_email($correo, $new_password)
                       href="https://gruposoca.com.mx/"
                       style="text-decoration: none"
                       ><img
-                        src="../../assets/img/slg logo.png"
+                        src="http://slg.gruposoca.com.mx/assets/img/slg%20logo.png"
                         width="165"
                         alt="Logo"
                         style="
