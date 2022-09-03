@@ -1,10 +1,5 @@
 <?php
 include 'php/conexion.php';
-session_start();
-$id_cliente = $_SESSION['usuario'];
-if (!isset($_SESSION['usuario'])) {
-  header("Location: ../error_login.html");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Bitacora de viajes locales</h3>
+        <h3><i class="fa fa-angle-right"></i> Bitacora de mercancia</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
@@ -26,11 +21,16 @@ if (!isset($_SESSION['usuario'])) {
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                   <tr>
-                    <th>Unidad</th>
-                    <th>Carga</th>
-                    <th class="hidden-phone">Operador</th>
-                    <th class="hidden-phone">Terminal de Carga</th>
-
+                    <th>Cliente</th>
+                    <th>Cantidad</th>
+                    <th class="hidden-phone">Mercancia</th>
+                    <th class="hidden-phone">Presentación</th>
+                    <th class="hidden-phone">Acciones</th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['usuario'])) {
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM viajes_locales WHERE id_cliente='$id_cliente'";
+                  $sql = "SELECT * FROM ingreso_almacen";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
@@ -57,28 +57,18 @@ if (!isset($_SESSION['usuario'])) {
                       <td><?php
 
 
-                          $sql1 = "SELECT * FROM unidades WHERE id='" . $mostrar['unidad'] . "'";
-                          $result1 = mysqli_query($conexion, $sql1);
-                          if ($Row = mysqli_fetch_array($result1)) {
-                            $nombre = $Row['modelo'];
-                          }
-                          echo $nombre;
-                          ?></td>
-                      <td><?php
-
-
-                          $sql1 = "SELECT * FROM tipo_carga WHERE id='" . $mostrar['operador'] . "'";
+                          $sql1 = "SELECT * FROM clientes WHERE id='" . $mostrar['id_cliente'] . "'";
                           $result1 = mysqli_query($conexion, $sql1);
                           if ($Row = mysqli_fetch_array($result1)) {
                             $nombre = $Row['nombre'];
                           }
                           echo $nombre;
                           ?></td>
-
+                      <td><?php echo $mostrar['cantidad'] ?></td>
                       <td><?php
 
 
-                          $sql1 = "SELECT * FROM trabajador WHERE id='" . $mostrar['operador'] . "'";
+                          $sql1 = "SELECT * FROM mercancia WHERE id='" . $mostrar['id_tipo_mercancia'] . "'";
                           $result1 = mysqli_query($conexion, $sql1);
                           if ($Row = mysqli_fetch_array($result1)) {
                             $nombre = $Row['nombre'];
@@ -88,55 +78,36 @@ if (!isset($_SESSION['usuario'])) {
                       <td><?php
 
 
-                          $sql1 = "SELECT * FROM terminales WHERE id='" . $mostrar['terminal'] . "'";
+                          $sql1 = "SELECT * FROM presentacion_mercancia WHERE id='" . $mostrar['id_presentacion_mercancia'] . "'";
                           $result1 = mysqli_query($conexion, $sql1);
                           if ($Row = mysqli_fetch_array($result1)) {
                             $nombre = $Row['nombre'];
                           }
                           echo $nombre;
                           ?></td>
-                      <td style="display: none;"><?php
-
-
-                                                  $sql1 = "SELECT * FROM tipo_servicio WHERE id='" . $mostrar['id_tipo_servicio'] . "'";
-                                                  $result1 = mysqli_query($conexion, $sql1);
-                                                  if ($Row = mysqli_fetch_array($result1)) {
-                                                    $nombre = $Row['nombre'];
-                                                  }
-                                                  echo $nombre;
-                                                  ?></td>
-                      <td style="display: none;"><?php
-
-
-                                                  $sql1 = "SELECT * FROM tipo_carga WHERE id='" . $mostrar['id_tipo_carga'] . "'";
-                                                  $result1 = mysqli_query($conexion, $sql1);
-                                                  if ($Row = mysqli_fetch_array($result1)) {
-                                                    $nombre = $Row['nombre'];
-                                                  }
-                                                  echo $nombre;
-                                                  ?></td>
-                      <td style="display: none;"><?php
-
-
-                                                  $sql1 = "SELECT * FROM tipo_contenedor WHERE id='" . $mostrar['id_tipo_contenedor'] . "'";
-                                                  $result1 = mysqli_query($conexion, $sql1);
-                                                  if ($Row = mysqli_fetch_array($result1)) {
-                                                    $nombre = $Row['nombre'];
-                                                  }
-                                                  echo $nombre;
-                                                  ?></td>
-
-                      <td style="display: none;"><?php echo $mostrar['dec'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['peso_neto'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['peso_tara'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['peso_bruto'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['destino'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['naviera'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['eir'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['inicio_estadias'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['fin_estadias'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['fecha'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['no_contenedores'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['hora'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_pedimento'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['transportista'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['operador'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_placas_tracto'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_placas_remolque'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['no_caja'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['sello'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['nombre'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['cantidad'] ?></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td style="display: none;"></td>
+                      <td>
+                        <a href='./editar_orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href='./eliminar_orden.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                      </td>
                     </tr>
                   <?php
                   }
@@ -151,7 +122,11 @@ if (!isset($_SESSION['usuario'])) {
       </section>
       <!-- /wrapper -->
     </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
     <?php include("templates/footer.php"); ?>
+    <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="../assets/lib/jquery/jquery.min.js"></script>
@@ -170,24 +145,23 @@ if (!isset($_SESSION['usuario'])) {
     function fnFormatDetails(oTable, nTr) {
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-      sOut += '<tr><td>Fecha:</td><td>' + aData[17] + '</td></tr>';
-      sOut += '<tr><td>Tipo de unidad:</td><td>Propia</td></tr>';
-      sOut += '<tr><td>Unidad:</td><td>' + aData[1] + '</td></tr>';
-      sOut += '<tr><td>Tipo de servicio:</td><td>' + aData[6] + '</td></tr>';
-      sOut += '<tr><td>Tipo de carga:</td><td>' + aData[2] + '</td></tr>';
-      sOut += '<tr><td>Tipo de contenedor:</td><td>' + aData[7] + '</td></tr>';
-      sOut += '<tr><td>No.contenedores:</td><td>' + aData[18] + '</td></tr>';
-      sOut += '<tr><td>Operador:</td><td>' + aData[3] + '</td></tr>';
-      sOut += '<tr><td>DEC:</td><td><a href="../viajes/locales/' + aData[17] + '/' + aData[8] + '" target="_blank" rel="noopener noreferrer"> <i class="fa fa-file"></i></a></td></tr>';
-      sOut += '<tr><td>Terminal:</td><td>' + aData[4] + '</td></tr>';
-      sOut += '<tr><td>Peso neto:</td><td>' + aData[9] + '</td></tr>';
-      sOut += '<tr><td>Peso tara:</td><td>' + aData[10] + '</td></tr>';
-      sOut += '<tr><td>Peso bruto:</td><td>' + aData[11] + '</td></tr>';
-      sOut += '<tr><td>Destino:</td><td>' + aData[12] + '</td></tr>';
-      sOut += '<tr><td>Naviera:</td><td>' + aData[13] + '</td></tr>';
-      sOut += '<tr><td>EIR:</td><td><a href="../viajes/locales/' + aData[17] + '/' + aData[14] + '" target="_blank" rel="noopener noreferrer"> <i class="fa fa-file"></i></a></td></tr>';
-      sOut += '<tr><td>Fecha de inicio de estadias:</td><td>' + aData[15] + '</td></tr>';
-      sOut += '<tr><td>Fecha de termino de estadias:</td><td>' + aData[16] + '</td></tr>';
+      sOut += '<tr><td>Nombre del Cliente:</td><td>' + aData[1] + '</td></tr>';
+      sOut += '<tr><td>Fecha de Ingreso:</td><td>' + aData[5] + '</td></tr>';
+      sOut += '<tr><td>Hora:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Tipo de mercancia:</td><td>' + aData[3] + '</td></tr>';
+      sOut += '<tr><td>Presentación:</td><td>' + aData[4] + '</td></tr>';
+      sOut += '<tr><td>Pedimento:</td><td>' + aData[7] + '</td></tr>';
+      sOut += '<tr><td>Tipo de operacion:</td><td>' + aData[8] + '</td></tr>';
+      sOut += '<tr><td>Transportista:</td><td>' + aData[9] + '</td></tr>';
+      sOut += '<tr><td>Operador:</td><td>' + aData[10] + '</td></tr>';
+      sOut += '<tr><td>No. Placas Tracto:</td><td>' + aData[11] + '</td></tr>';
+      sOut += '<tr><td>No. Placas Remolque:</td><td>' + aData[12] + '</td></tr>';
+      sOut += '<tr><td>No. Caja:</td><td>' + aData[13] + '</td></tr>';
+      sOut += '<tr><td>Sello:</td><td>' + aData[14] + '</td></tr>';
+      sOut += '<tr><td>Nombre:</td><td>' + aData[15] + '</td></tr>';
+      sOut += '<tr><td>Cantidad:</td><td>' + aData[2] + '</td></tr>';
+      sOut += '<tr><td>Descripción:</td><td>' + aData[14] + '</td></tr>';
+      sOut += '<tr><td>Firma de Supervisor:</td><td><a href="../firmas/' + aData[16] + '" target="_blank" rel="noopener noreferrer">Imagen</a></td></tr>';
       sOut += '</table>';
 
       return sOut;
@@ -241,6 +215,4 @@ if (!isset($_SESSION['usuario'])) {
       });
     });
   </script>
-</body>
-
-</html>
+</body </html>

@@ -14,6 +14,8 @@ $sql6 = "SELECT * FROM tipo_contenedor";
 $result6 = mysqli_query($conexion, $sql6);
 $sql7 = "SELECT * FROM unidades";
 $result7 = mysqli_query($conexion, $sql7);
+$sql8 = "SELECT * FROM clientes";
+$result8 = mysqli_query($conexion, $sql8);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +36,21 @@ $result7 = mysqli_query($conexion, $sql7);
           <div class="col-lg-12">
             <div class="form-panel">
               <form class="form-horizontal style-form" id="formViajeLocal" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Cliente</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='cliente'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result8)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
                 <div class="form-group">
                   <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">

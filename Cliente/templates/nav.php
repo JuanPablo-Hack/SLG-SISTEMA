@@ -12,16 +12,11 @@
         </ul>
     </div>
 </header>
-<!--header end-->
-<!-- **********************************************************************************************************************************************************
-        MAIN SIDEBAR MENU
-        *********************************************************************************************************************************************************** -->
-<!--sidebar start-->
 <aside>
     <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="profile.html"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
+            <p class="centered"><a href="profile.php"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
             <h5 class="centered">Cliente</h5>
             <li class="mt">
                 <a class="active" href="index.php">
@@ -31,24 +26,33 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-anchor"></i>
-                    <span>Embarques</span>
+                    <i class="fa fa-tag"></i>
+                    <span>Almacen</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden.php">Bitacora de Embarques</a></li>
-                    
-
+                    <li><a href="listar_ingresos.php">Bitacoras de Ingresos</a></li>
+                    <li><a href="listar_salidad.php">Bitacoras de Salidas</a></li>
+                    <li><a href="listar_orden.php">Bitacora de mercancia</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-car"></i>
-                    <span>Unidades</span>
+                    <span>Viajes Locales</span>
                 </a>
                 <ul class="sub">
 
-                    <li><a href="listar_orden2.php">Mis unidades</a></li>
+                    <li><a href="listar_orden2.php">Mis viajes</a></li>
 
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-anchor"></i>
+                    <span>Viajes Foraneos</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="listar_orden3.php">Mis viajes</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -57,7 +61,7 @@
                     <span>Facturas</span>
                 </a>
                 <ul class="sub">
-                   
+
                     <li><a href="listar_orden3.php">Lista de Facturas</a></li>
 
                 </ul>

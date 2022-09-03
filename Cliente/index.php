@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+  header("Location: ../error_login.html");
+} else {
+  if ($_SESSION['datos_cargados'] == 0) {
+    header("Location: ./profile.php");
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

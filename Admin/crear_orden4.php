@@ -12,6 +12,8 @@ $sql5 = "SELECT * FROM tipo_operacion";
 $result5 = mysqli_query($conexion, $sql5);
 $sql6 = "SELECT * FROM tipo_contenedor";
 $result6 = mysqli_query($conexion, $sql6);
+$sql8 = "SELECT * FROM clientes";
+$result8 = mysqli_query($conexion, $sql8);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +35,21 @@ $result6 = mysqli_query($conexion, $sql6);
             <div class="form-panel">
               <form class="form-horizontal style-form" id="formViajeForaneo" enctype="multipart/form-data">
                 <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Cliente</label>
+                  <div class="col-sm-4">
+                    <select class="form-control" name='cliente'>
+                      <option value="0"></option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result8)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="control-label col-md-3">Fecha de servicio</label>
                   <div class="col-md-3 col-xs-11">
                     <input class="form-control form-control-inline" size="16" type="date" name="fecha">
@@ -42,7 +59,7 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Tipo unidad</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='tipo_unidad'>
+                    <select class="form-control" name='tipo_unidad' id="filtro_unidad">
                       <option value="0">-</option>
                       <option value="1">Propias</option>
                       <option value="2">Proveedor</option>
@@ -52,11 +69,7 @@ $result6 = mysqli_query($conexion, $sql6);
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Unidad Asignada</label>
                   <div class="col-sm-4">
-                    <select class="form-control" name='unidad'>
-                      <option value="0">-</option>
-                      <option value="1">Propias</option>
-                      <option value="2">Proveedor</option>
-                    </select>
+                    <select class="form-control" name='unidad' id="unidades"></select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -297,6 +310,20 @@ $result6 = mysqli_query($conexion, $sql6);
   <script type="text/javascript" src="../assets/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script src="../assets/lib/advanced-form-components.js"></script>
   <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#filtro_unidad").change(function() {
+        $("#filtro_unidad option:selected").each(function() {
+          id_tipo = $(this).val();
+          $.post("php/unidades.php", {
+            id_tipo: id_tipo
+          }, function(data) {
+            $("#unidades").html(data);
+          });
+        });
+      })
+    });
+  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       document
