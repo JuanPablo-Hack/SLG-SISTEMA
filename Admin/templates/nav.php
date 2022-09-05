@@ -69,10 +69,10 @@
                 </a>
                 <ul class="sub">
                     <li><a href="crear_unidad.php">Dar de alta</a></li>
-                    <li><a href="listar_unidades.php">Mis Unidades</a></li>
+                    <li><a href="listar_unidades.php">Unidades</a></li>
+                    <li><a href="alta_unidad.html">Alta de Tractocamiones</a></li>
                     <li><a href="alta_unidad.html">Tractocamiones y arrastres</a></li>
-                    <li><a href="alta_unidad.html">Mis Tractocamiones y arrastres</a></li>
-                    <li><a href="alta_unidad.html">Dar de operadores</a></li>
+                    <li><a href="alta_unidad.html">Alta de operadores</a></li>
                     <li><a href="listar_unidades.php">Mis operadores</a></li>
                 </ul>
             </li>

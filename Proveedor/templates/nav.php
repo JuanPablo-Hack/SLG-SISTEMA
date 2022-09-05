@@ -12,16 +12,11 @@
         </ul>
     </div>
 </header>
-<!--header end-->
-<!-- **********************************************************************************************************************************************************
-        MAIN SIDEBAR MENU
-        *********************************************************************************************************************************************************** -->
-<!--sidebar start-->
 <aside>
     <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="profile.html"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
+            <p class="centered"><a href="profile.php"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
             <h5 class="centered">Proveedor</h5>
             <li class="mt">
                 <a class="active" href="index.php">
@@ -31,43 +26,22 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-truck"></i>
+                    <i class="fa fa-car"></i>
                     <span>Unidades</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="alta_unidad.php">Alta de Unidad</a></li>
-                    <li><a href="listar_unidades.php">Bitacora de Unidades</a></li>
-
+                    <li><a href="crear_unidad.php">Dar de alta</a></li>
+                    <li><a href="listar_unidades.php">Mis Unidades</a></li>
+                    <li><a href="alta_tractos.php">Alta Tractocamiones</a></li>
+                    <li><a href="listar_tractos.php">Mis Tractocamiones</a></li>
+                    <li><a href="crear_operador.php">Alta de operadores</a></li>
+                    <li><a href="listar_operadores.php">Mis operadores</a></li>
                 </ul>
             </li>
-            
-
-
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-car"></i>
-                    <span>Equipos</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="alta_unidad.html">Dar de Tractos</a></li>
-                    <li><a href="listar_unidades.php">Mis Tractos</a></li>
-
-
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-group"></i>
-                    <span>Usuarios</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="alta_trabajador.html">Crear Operador</a></li>
-                    <li><a href="listar_trabajador.php">Listar Operador</a></li>
 
 
 
-                </ul>
-            </li>
+
 
         </ul>
         <!-- sidebar menu end-->

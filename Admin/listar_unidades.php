@@ -32,11 +32,12 @@ include 'php/conexion.php';
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
+                    <th style="display: none;"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM unidades WHERE tipo_unidad=1";
+                  $sql = "SELECT * FROM unidades";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
@@ -52,6 +53,11 @@ include 'php/conexion.php';
                       <td style="display: none;"><?php echo $mostrar['tipounidad'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['serie'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
+                      <td style="display: none;"><?php if ($mostrar['descripcion'] > 1) {
+                                                    echo "Unidad de Proveedor";
+                                                  } else {
+                                                    echo "Unidad Propia";
+                                                  } ?></td>
                       <td>
                         <a href='./editar_unidad.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                         <a onclick="eliminarUnidad(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
@@ -104,6 +110,7 @@ include 'php/conexion.php';
       sOut += '<tr><td>Tipo Combustible:</td><td>' + aData[4] + '</td></tr>';
       sOut += '<tr><td>Serie:</td><td>' + aData[9] + '</td></tr>';
       sOut += '<tr><td>Descripción:</td><td>' + aData[10] + '</td></tr>';
+      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[11] + '</td></tr>';
       sOut += '</table>';
 
       return sOut;
