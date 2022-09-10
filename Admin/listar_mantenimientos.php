@@ -67,8 +67,8 @@ include 'php/conexion.php';
                       <td style="display: none;"><?php echo $mostrar['km'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['factura_arch'] ?></td>
                       <td>
-                        <a href='./editar_mantenimiento.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a onclick="eliminarMantenimiento(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
+                        <a href='./editar_orden2.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href='./eliminar_orden2.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
                       </td>
                     </tr>
                   <?php
@@ -159,71 +159,6 @@ include 'php/conexion.php';
         }
       });
     });
-  </script>
-  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
-  <script>
-    function eliminarMantenimiento(id) {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
-        },
-        buttonsStyling: false,
-      });
-
-      swalWithBootstrapButtons
-        .fire({
-          title: "Estas seguro?",
-          text: "¡No podrás revertir esto!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Si, eliminar",
-          cancelButtonText: "No, cancelar!",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            let data = new FormData();
-            data.append("id", id);
-            data.append("accion", "eliminar");
-            fetch("php/mantenimiento_controller.php", {
-                method: "POST",
-                body: data,
-              })
-              .then((result) => result.text())
-              .then((result) => {
-                if (result == 1) {
-                  swalWithBootstrapButtons.fire(
-                    "Eliminado!",
-                    "Su archivo ha sido eliminado.",
-                    "success"
-                  );
-                  setTimeout(function() {
-                    location.reload();
-                  }, 3000);
-                } else {
-                  swalWithBootstrapButtons.fire(
-                    "Error",
-                    "Hemos tenido un error a la base de datos o la conexión.",
-                    "error"
-                  );
-                  setTimeout(function() {
-                    location.reload();
-                  }, 3000);
-                }
-              });
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              "Cancelado",
-              "Tu archivo ha sido salvado",
-              "error"
-            );
-          }
-        });
-    }
   </script>
 </body>
 

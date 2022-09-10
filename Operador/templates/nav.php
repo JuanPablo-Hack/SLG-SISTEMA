@@ -22,7 +22,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             <p class="centered"><a href="profile.html"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
-            <h5 class="centered">Mantenimiento</h5>
+            <h5 class="centered">Operador</h5>
             <li class="mt">
                 <a class="active" href="index.php">
                     <i class="fa fa-dashboard"></i>
@@ -44,9 +44,8 @@
                     <span>Bitacora de Mantenimiento</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="bitacora_mantenimiento.php">Crear Registro</a></li>
-                    <li><a href="listar_mantenimientos.php">Bitacora</a></li>
-
+                    <li><a href="bitacora_combustible.php">Alta de Combustible</a></li>
+                    <li><a href="listar_combustible.php">Bitacora de Combustible</a></li>
                 </ul>
             </li>
         </ul>

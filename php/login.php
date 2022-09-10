@@ -14,8 +14,13 @@ function login($conexion, $user, $password)
         $resultado = $conexion->query($sql);
         if ($row = mysqli_fetch_assoc($resultado)) {
             $_SESSION['usuario'] = $row['id'];
-            header("HTTP/1.1 302 Moved Temporarily");
-            header("Location: ../Trabajador/");
+            if ($row['cargo'] == 1) {
+                header("HTTP/1.1 302 Moved Temporarily");
+                header("Location: ../Operador/");
+            } else {
+                header("HTTP/1.1 302 Moved Temporarily");
+                header("Location: ../Mantenimiento/");
+            }
         } else {
             $sql = "SELECT * FROM clientes WHERE email='$user' and pwd='$password'";
             $resultado = $conexion->query($sql);

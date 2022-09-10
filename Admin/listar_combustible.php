@@ -13,7 +13,7 @@ include 'php/conexion.php';
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Bitacora de mercancia</h3>
+        <h3><i class="fa fa-angle-right"></i> Bitacora de combustible</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
@@ -21,10 +21,11 @@ include 'php/conexion.php';
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                   <tr>
-                    <th>Modelo</th>
-                    <th>Placas</th>
-                    <th class="hidden-phone">Capacidad</th>
-                    <th class="hidden-phone">Combustible</th>
+                    <th>Unidad</th>
+                    <th>Operador</th>
+                    <th class="hidden-phone">Litros Cargados</th>
+                    <th class="hidden-phone">No. Factura</th>
+                    <th class="hidden-phone">Acciones</th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
@@ -36,27 +37,45 @@ include 'php/conexion.php';
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM unidades where tipo_unidad=1";
+                  $sql = "SELECT * FROM registros_combustible";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
                     <tr>
+                      <td><?php
 
-                      <td><?php echo $mostrar['modelo'] ?></td>
-                      <td><?php echo $mostrar['placas'] ?></td>
-                      <td><?php echo $mostrar['capacidad'] ?></td>
-                      <td><?php echo $mostrar['tipocombustible'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['ano'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['color'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['noeconomico'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['tipounidad'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['serie'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
-                      <td style="display: none;"><?php if ($mostrar['descripcion'] > 1) {
-                                                    echo "Unidad de Proveedor";
-                                                  } else {
-                                                    echo "Unidad Propia";
-                                                  } ?></td>
+
+                          $sql1 = "SELECT * FROM unidades WHERE id='" . $mostrar['unidad'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['modelo'];
+                          }
+                          echo $nombre;
+                          ?></td>
+                      <td><?php
+
+
+                          $sql1 = "SELECT * FROM tipo_carga WHERE id='" . $mostrar['operador'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
+                          }
+                          echo $nombre;
+                          ?></td>
+
+                      <td><?php echo $mostrar['litros'] ?></td>
+                      <td><?php echo $mostrar['factura'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['fecha'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['kminicial'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['kmfinal'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['tiposervicio'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['rendimiento'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['importe'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['factura_arch'] ?></td>
+                      <td>
+                        <a href='./editar_mantenimiento.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a onclick="eliminarMantenimiento(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
+                      </td>
                     </tr>
                   <?php
                   }
@@ -71,11 +90,7 @@ include 'php/conexion.php';
       </section>
       <!-- /wrapper -->
     </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
-    <!--footer start-->
     <?php include("templates/footer.php"); ?>
-    <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="../assets/lib/jquery/jquery.min.js"></script>
@@ -88,24 +103,18 @@ include 'php/conexion.php';
   <script type="text/javascript" src="../assets/lib/advanced-datatable/js/DT_bootstrap.js"></script>
   <!--common script for all pages-->
   <script src="../assets/lib/common-scripts.js"></script>
-  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
   <!--script for this page-->
   <script type="text/javascript">
     /* Formating function for row details */
     function fnFormatDetails(oTable, nTr) {
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-      sOut += '<tr><td>Modelo:</td><td>' + aData[1] + '</td></tr>';
-      sOut += '<tr><td>Año:</td><td>' + aData[5] + '</td></tr>';
-      sOut += '<tr><td>Color:</td><td>' + aData[6] + '</td></tr>';
-      sOut += '<tr><td>Placas:</td><td>' + aData[2] + '</td></tr>';
-      sOut += '<tr><td>No. Economico:</td><td>' + aData[7] + '</td></tr>';
-      sOut += '<tr><td>Capacidad:</td><td>' + aData[3] + '</td></tr>';
-      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[8] + '</td></tr>';
-      sOut += '<tr><td>Tipo Combustible:</td><td>' + aData[4] + '</td></tr>';
-      sOut += '<tr><td>Serie:</td><td>' + aData[9] + '</td></tr>';
-      sOut += '<tr><td>Descripción:</td><td>' + aData[10] + '</td></tr>';
-      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[11] + '</td></tr>';
+      sOut += '<tr><td>Fecha de Carga:</td><td>' + aData[5] + '</td></tr>';
+      sOut += '<tr><td>Kilometraje Inicial:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Kilometraje Final:</td><td>' + aData[7] + '</td></tr>';
+      sOut += '<tr><td>Tipo servicio:</td><td>' + aData[8] + '</td></tr>';
+      sOut += '<tr><td>Rendimiento:</td><td>' + aData[9] + '</td></tr>';
+      sOut += '<tr><td>Factura:</td><td><a href="../control_unidades/combustible/' + aData[11] + '" target="_blank" rel="noopener noreferrer"> <i class="fa fa-file"></i></a></td></tr>';
       sOut += '</table>';
 
       return sOut;
@@ -159,8 +168,9 @@ include 'php/conexion.php';
       });
     });
   </script>
+  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
   <script>
-    function eliminarUnidad(id) {
+    function eliminarMantenimiento(id) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: "btn btn-success",
@@ -184,7 +194,7 @@ include 'php/conexion.php';
             let data = new FormData();
             data.append("id", id);
             data.append("accion", "eliminar");
-            fetch("php/unidad_controller.php", {
+            fetch("php/mantenimiento_controller.php", {
                 method: "POST",
                 body: data,
               })
@@ -223,4 +233,6 @@ include 'php/conexion.php';
         });
     }
   </script>
-</body </html>
+</body>
+
+</html>

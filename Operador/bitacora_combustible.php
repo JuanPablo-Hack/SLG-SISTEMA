@@ -1,9 +1,9 @@
 <?php
 include 'php/conexion.php';
-$sql2 = "SELECT * FROM unidades where tipo_unidad=1";
-$result2 = mysqli_query($conexion, $sql2);
 $sql = "SELECT * FROM trabajador";
 $result = mysqli_query($conexion, $sql);
+$sql2 = "SELECT * FROM unidades where tipo_unidad=1";
+$result2 = mysqli_query($conexion, $sql2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +17,12 @@ $result = mysqli_query($conexion, $sql);
     <?php include 'templates/nav.php'; ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Crear Bitaroca de Mantenimiento</h3>
+        <h3><i class="fa fa-angle-right"></i> Crear Bitaroca de Combustible</h3>
         <div class="row mt">
           <!--  DATE PICKERS -->
           <div class="col-lg-12">
             <div class="form-panel">
-              <form class="form-horizontal style-form" id="FormMantenimiento">
+              <form class="form-horizontal style-form" id="FormCombustible">
 
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Unidad Asignada</label>
@@ -37,6 +37,44 @@ $result = mysqli_query($conexion, $sql);
                       }
                       ?>
                     </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Fecha de próximo servicio</label>
+                  <div class="col-md-3 col-xs-11">
+                    <input class="form-control form-control-inline" size="16" type="date" name="fecha">
+                    <span class="help-block">Selecciona una fecha</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Km inicial</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="km_inicial">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Km final</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="km_final">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Tipo de Servicio</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="tipo_servicio">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">Litros de Carga</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="litros">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 col-sm-2 control-label">No.Factura</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="no_factura">
                   </div>
                 </div>
                 <div class="form-group">
@@ -55,34 +93,9 @@ $result = mysqli_query($conexion, $sql);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Nombre de Taller</label>
+                  <label class="col-sm-2 col-sm-2 control-label">Importe</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" name="taller">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">No. de Factura</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" name="factura">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3">Fecha de próximo servicio</label>
-                  <div class="col-md-3 col-xs-11">
-                    <input class="form-control form-control-inline" size="16" type="date" name="prox_ser">
-                    <span class="help-block">Selecciona una fecha</span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Kilometraje</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" name="km">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Descripción</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" name="descripcion">
+                    <input type="text" class="form-control" name="importe">
                   </div>
                 </div>
                 <div class="form-group">
@@ -101,10 +114,11 @@ $result = mysqli_query($conexion, $sql);
                 </div>
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
-                    <button class="btn btn-theme" type="submit">Crear</button>
-                    <a href="listar_mantenimientos.php" class="btn btn-theme04" type="button">Cancelar</a>
+                    <button class="btn btn-theme" type="submit">Crear registro de combustible</button>
+                    <a href="listar_combustible.php" class="btn btn-theme04" type="button">Cancelar</a>
                   </div>
                 </div>
+
 
               </form>
             </div>
@@ -151,12 +165,12 @@ $result = mysqli_query($conexion, $sql);
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       document
-        .getElementById("FormMantenimiento")
-        .addEventListener("submit", crearMantenimiento);
+        .getElementById("FormCombustible")
+        .addEventListener("submit", crearCombustible);
     });
-    async function crearMantenimiento(e) {
+    async function crearCombustible(e) {
       e.preventDefault();
-      var form = document.getElementById("FormMantenimiento");
+      var form = document.getElementById("FormCombustible");
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: "btn btn-success",
@@ -169,7 +183,7 @@ $result = mysqli_query($conexion, $sql);
           title: "Estas seguro que la información es la correcta?",
           icon: "warning",
           showCancelButton: true,
-          confirmButtonText: "Si, agregar registro de mantenimiento",
+          confirmButtonText: "Si, agregar registro de combustible",
           cancelButtonText: "No, cancelar!",
           reverseButtons: true,
         })
@@ -177,7 +191,7 @@ $result = mysqli_query($conexion, $sql);
           if (result.isConfirmed) {
             let data = new FormData(form);
             data.append("accion", "agregar");
-            fetch("php/mantenimiento_controller.php", {
+            fetch("php/combustible_controller.php", {
                 method: "POST",
                 body: data,
               })
@@ -186,7 +200,7 @@ $result = mysqli_query($conexion, $sql);
                 if (result == 1) {
                   swalWithBootstrapButtons.fire(
                     "Agregado!",
-                    "El registro de mantenimiento ha sido agregado en la base de datos.",
+                    "El registro de combustible ha sido agregado en la base de datos.",
                     "success"
                   );
                   form.reset();
@@ -217,7 +231,6 @@ $result = mysqli_query($conexion, $sql);
         });
     }
   </script>
-
 </body>
 
 </html>
