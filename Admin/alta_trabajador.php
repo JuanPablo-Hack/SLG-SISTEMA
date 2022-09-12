@@ -48,6 +48,7 @@
                         <option value="0">-</option>
                         <option value="1">Operador</option>
                         <option value="2">Mantenimiento</option>
+                        <option value="3">Supervisor</option>
                       </select>
                     </div>
                   </div>

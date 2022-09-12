@@ -17,9 +17,13 @@ function login($conexion, $user, $password)
             if ($row['cargo'] == 1) {
                 header("HTTP/1.1 302 Moved Temporarily");
                 header("Location: ../Operador/");
-            } else {
+            }
+            if ($row['cargo'] == 2) {
                 header("HTTP/1.1 302 Moved Temporarily");
                 header("Location: ../Mantenimiento/");
+            } else {
+                header("HTTP/1.1 302 Moved Temporarily");
+                header("Location: ../Supervisor/");
             }
         } else {
             $sql = "SELECT * FROM clientes WHERE email='$user' and pwd='$password'";

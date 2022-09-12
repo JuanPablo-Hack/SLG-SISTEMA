@@ -19,7 +19,7 @@ $result2 = mysqli_query($conexion, $sql2);
         <?php include("templates/nav.php"); ?>
         <section id="main-content">
             <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i> Crear viajes locales</h3>
+                <h3><i class="fa fa-angle-right"></i> Crear registro de facturas</h3>
                 <div class="row mt">
                     <!--  DATE PICKERS -->
                     <div class="col-lg-12">

@@ -92,12 +92,12 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-group"></i>
+                    <i class="fa fa-money"></i>
                     <span>Contabilidad</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="alta_proveedor.php">Alta de Facturas</a></li>
-                    <li><a href="alta_trabajador.html">Bitacora de facturas</a></li>
+                    <li><a href="alta_facturas.php">Alta de Facturas</a></li>
+                    <li><a href="listar_facturas.php">Bitacora de facturas</a></li>
 
                 </ul>
             </li>

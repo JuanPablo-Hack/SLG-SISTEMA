@@ -133,7 +133,7 @@ function mandar_notificación($cliente)
   $row = mysqli_fetch_array($resultado);
   enviar_email($row['email'], $row['nombre']);
 }
-//TODO: Terminar la funcionalidad de enviar notificaciones al cliente al crear el viaje tanto en local como en foraneo.
+
 function enviar_email($correo, $cliente)
 {
 

@@ -31,41 +31,63 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-tag"></i>
                     <span>Almacen</span>
                 </a>
                 <ul class="sub">
                     <li><a href="crear_orden.php">Ingreso de mercancia</a></li>
-                    <li><a href="listar_orden.php">Salidas de mercancia</a></li>
-
+                    <li><a href="listar_ingresos.php">Bitacoras de Ingresos</a></li>
+                    <li><a href="crear_orden2.php">Salidas de mercancia</a></li>
+                    <li><a href="listar_salidad.php">Bitacoras de Salidas</a></li>
+                    <li><a href="listar_orden.php">Bitacora de mercancia</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
-                    <span>Consolidación de mercancias</span>
+                    <i class="fa fa-truck"></i>
+                    <span>Viajes Locales</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden2.php">Crear Registro</a></li>
-                    <li><a href="listar_orden2.php">Bitacora</a></li>
-
+                    <li><a href="crear_orden3.php">Crear Viaje</a></li>
+                    <li><a href="listar_orden2.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-calendar"></i>
-                    <span>Consolidación de buque</span>
+                    <i class="fa fa-plane"></i>
+                    <span>Viajes Foraneos</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="crear_orden3.php">Crear Registro</a></li>
-                    <li><a href="listar_orden3.php">Bitacora</a></li>
-
+                    <li><a href="crear_orden4.php">Crear Viaje</a></li>
+                    <li><a href="listar_orden3.php">Bitacora Viaje</a></li>
                 </ul>
             </li>
-
-
-           
-
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-car"></i>
+                    <span>Unidades</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="crear_unidad.php">Dar de alta</a></li>
+                    <li><a href="listar_unidades.php">Unidades</a></li>
+                    <li><a href="alta_unidad.html">Alta de Tractocamiones</a></li>
+                    <li><a href="alta_unidad.html">Tractocamiones y arrastres</a></li>
+                    <li><a href="listar_mantenimientos.php">Bitacora de Mantenimiento</a></li>
+                    <li><a href="listar_combustible.php">Bitacora de Combustible</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-group"></i>
+                    <span>Usuarios</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="alta_proveedor.php">Crear proveedores</a></li>
+                    <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
+                    <li><a href="alta_cliente.php">Crear Clientes</a></li>
+                    <li><a href="listar_trabajador.php">Listar Clientes</a></li>
+                </ul>
+            </li>
         </ul>
         <!-- sidebar menu end-->
     </div>
