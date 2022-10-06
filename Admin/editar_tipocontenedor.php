@@ -1,6 +1,9 @@
 <?php
 include 'php/conexion.php';
-
+$id_mercancia = $_GET['id'];
+$sql = "SELECT * FROM tipo_contenedor WHERE id='$id_mercancia'";
+$resultado = $conexion->query($sql);
+$row = mysqli_fetch_array($resultado);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,23 +18,23 @@ include 'php/conexion.php';
         <?php include("templates/nav.php"); ?>
         <section id="main-content">
             <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i>Crear tipo contenedor</h3>
+                <h3><i class="fa fa-angle-right"></i>Editar Tipo Contenedor</h3>
                 <div class="row mt">
                     <!--  DATE PICKERS -->
                     <div class="col-lg-12">
                         <div class="form-panel">
-                            <form class="form-horizontal style-form" id="formTipoContenedor">
-
+                            <form class="form-horizontal style-form" id="formEditarTipoContenedor">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Nombre </label>
                                     <div class="col-sm-4">
-                                        <input type="text" name='nombre' class="form-control" required />
+                                        <input type="text" name='nombre' class="form-control" value="<?php echo $row['nombre']; ?>" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Descripción </label>
                                     <div class="col-lg-10">
-                                        <textarea class="form-control " id="ccomment" name="descripcion" required></textarea>
+                                        <textarea class="form-control " id="ccomment" name="descripcion" required><?php echo $row['descrip']; ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -77,12 +80,12 @@ include 'php/conexion.php';
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
-                .getElementById("formTipoContenedor")
-                .addEventListener("submit", formTipoContenedor);
+                .getElementById("formEditarTipoContenedor")
+                .addEventListener("submit", formEditarTipoContenedor);
         });
-        async function formTipoContenedor(e) {
+        async function formEditarTipoContenedor(e) {
             e.preventDefault();
-            var form = document.getElementById("formTipoContenedor");
+            var form = document.getElementById("formEditarTipoContenedor");
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -95,14 +98,14 @@ include 'php/conexion.php';
                     title: "Estas seguro que la información es la correcta?",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonText: "Si, agregar tipo de contenedor",
+                    confirmButtonText: "Si, editar tipo contenedor",
                     cancelButtonText: "No, cancelar!",
                     reverseButtons: true,
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
                         let data = new FormData(form);
-                        data.append("accion", "agregar");
+                        data.append("accion", "editar");
                         fetch("php/tipocontenedor_controller.php", {
                                 method: "POST",
                                 body: data,
@@ -112,7 +115,7 @@ include 'php/conexion.php';
                                 if (result == 1) {
                                     swalWithBootstrapButtons.fire(
                                         "Agregado!",
-                                        "El tipo de contenedor ha sido agregado en la base de datos.",
+                                        "La actividad ha sido agregado en la base de datos.",
                                         "success"
                                     );
                                     form.reset();

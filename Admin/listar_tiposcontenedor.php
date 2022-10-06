@@ -42,7 +42,7 @@ include 'php/conexion.php';
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['descrip'] ?></td>
                                             <td>
-                                                <a href='./editar_mercancia.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <a href='./editar_tipocontenedor.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <a onclick="eliminiarmercancia(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
                                             </td>
                                         </tr>
@@ -103,7 +103,7 @@ include 'php/conexion.php';
                         let data = new FormData();
                         data.append("id", id);
                         data.append("accion", "eliminar");
-                        fetch("php/mercancia_controller.php", {
+                        fetch("php/tipocontenedor_controller.php", {
                                 method: "POST",
                                 body: data,
                             })
