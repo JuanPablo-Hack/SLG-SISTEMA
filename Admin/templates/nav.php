@@ -110,7 +110,7 @@
                     <li><a href="listar_mercancia.php">Tipos de mercancia</a></li>
                     <li><a href="listar_presentaciones.php">Presentaciones de mercancia</a></li>
                     <li><a href="listar_tiposoperaciones.php">Tipos de operacion</a></li>
-                    <li><a href="listar_tipocontenedor.php">Tipos de contenedor</a></li>
+                    <li><a href="listar_tiposcontenedor.php">Tipos de contenedor</a></li>
                     <li><a href="listar_unidadesmedida.php">Unidades de medida</a></li>
                     <li><a href="listar_tipos_servicios.php">Tipos de servicio</a></li>
                     <li><a href="listar_cargas.php">Tipos de carga</a></li>
