@@ -71,7 +71,7 @@
                     <li><a href="crear_unidad.php">Dar de alta</a></li>
                     <li><a href="listar_unidades.php">Unidades</a></li>
                     <li><a href="alta_unidad.html">Alta de Tractocamiones</a></li>
-                    <li><a href="alta_unidad.html">Tractocamiones y arrastres</a></li>
+                    <li><a href="listar_tractos.php">Tractocamiones y arrastres</a></li>
                     <li><a href="listar_mantenimientos.php">Bitacora de Mantenimiento</a></li>
                     <li><a href="listar_combustible.php">Bitacora de Combustible</a></li>
                 </ul>
@@ -83,11 +83,11 @@
                 </a>
                 <ul class="sub">
                     <li><a href="alta_proveedor.php">Crear proveedores</a></li>
-                    <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
+                    <li><a href="listar_proveedores.php">Lista de proveedores</a></li>
                     <li><a href="alta_cliente.php">Crear Clientes</a></li>
-                    <li><a href="listar_trabajador.php">Listar Clientes</a></li>
+                    <li><a href="listar_cliente.php">Listar Clientes</a></li>
                     <li><a href="alta_trabajador.php">Crear trabajador</a></li>
-                    <li><a href="alta_trabajador.html">Lista de trabajadores</a></li>
+                    <li><a href="listar_trabajador.php">Lista de trabajadores</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
