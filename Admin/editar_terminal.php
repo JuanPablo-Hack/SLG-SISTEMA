@@ -38,6 +38,16 @@ $row = mysqli_fetch_array($resultado);
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">Tipo Terminal</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name='tipo'>
+                                            <option value="<?php echo $row['nombre']; ?>" selected>-</option>
+                                            <option value="1">Carga</option>
+                                            <option value="2">Descarga</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-theme" type="submit">Guardar</button>
                                         <button class="btn btn-theme04" type="button">Cancelar</button>
@@ -98,7 +108,7 @@ $row = mysqli_fetch_array($resultado);
                     title: "Estas seguro que la información es la correcta?",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonText: "Si, agregar actividad",
+                    confirmButtonText: "Si, editar terminal",
                     cancelButtonText: "No, cancelar!",
                     reverseButtons: true,
                 })
@@ -115,7 +125,7 @@ $row = mysqli_fetch_array($resultado);
                                 if (result == 1) {
                                     swalWithBootstrapButtons.fire(
                                         "Agregado!",
-                                        "La actividad ha sido agregado en la base de datos.",
+                                        "La terminal ha sido actualizada en la base de datos.",
                                         "success"
                                     );
                                     form.reset();
@@ -128,10 +138,10 @@ $row = mysqli_fetch_array($resultado);
                                         "Hemos tenido un error a la base de datos o la conexión.",
                                         "error"
                                     );
-                                    // form.reset();
-                                    // setTimeout(function() {
-                                    //     location.reload();
-                                    // }, 2000);
+                                    form.reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 2000);
                                 }
                             });
                     } else if (

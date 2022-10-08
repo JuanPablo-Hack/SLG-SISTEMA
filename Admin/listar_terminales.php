@@ -28,6 +28,7 @@ include 'php/conexion.php';
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Descripcion</th>
+                                        <th>Tipo de terminal</th>
                                         <th class="hidden-phone">Acciones</th>
                                     </tr>
                                 </thead>
@@ -41,6 +42,15 @@ include 'php/conexion.php';
 
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['descrip'] ?></td>
+                                            <td><?php
+                                                if ($mostrar['tipo_terminal'] == 1) {
+                                                    echo 'Carga';
+                                                } else if ($mostrar['tipo_terminal'] == 2) {
+                                                    echo 'Descarga';
+                                                }else{
+                                                    echo 'Sin Indentificar';
+                                                }
+                                                ?></td>
                                             <td>
                                                 <a href='./editar_terminal.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <a onclick="eliminarterminales(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>

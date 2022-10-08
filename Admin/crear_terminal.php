@@ -31,6 +31,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">Tipo Terminal</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name='tipo'>
+                                            <option value="0">-</option>
+                                            <option value="1">Carga</option>
+                                            <option value="2">Descarga</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-theme" type="submit">Guardar</button>
                                         <button class="btn btn-theme04" type="button">Cancelar</button>

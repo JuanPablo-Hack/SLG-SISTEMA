@@ -1,19 +1,19 @@
 <?php
 switch ($_POST['accion']) {
     case 'agregar':
-        agregar_terminales($_POST['nombre'], $_POST['descripcion']);
+        agregar_terminales($_POST['nombre'], $_POST['descripcion'], $_POST['tipo']);
         break;
     case 'editar':
-        editar_terminales($_POST['id'], $_POST['nombre'], $_POST['descripcion']);
+        editar_terminales($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['tipo']);
         break;
     case 'eliminar':
         eliminar_terminales($_POST['id']);
         break;
 }
-function agregar_terminales($nombre, $descrip)
+function agregar_terminales($nombre, $descrip, $tipo)
 {
     include 'conexion.php';
-    $sql = "INSERT INTO terminales (nombre, descrip) VALUES ('$nombre','$descrip');";
+    $sql = "INSERT INTO `terminales` (`id`, `nombre`, `descrip`, `tipo_terminal`) VALUES (NULL, '$nombre', '$descrip', '$tipo')";
     $resultado = $conexion->query($sql);
     if ($resultado) {
         echo 1;
@@ -21,11 +21,11 @@ function agregar_terminales($nombre, $descrip)
         echo 2;
     }
 }
-function editar_terminales($id, $nombre, $descrip)
+function editar_terminales($id, $nombre, $descrip, $tipo)
 {
 
     include 'conexion.php';
-    $sql = "UPDATE terminales SET  nombre='$nombre', descrip='$descrip' WHERE id='$id'";
+    $sql = "UPDATE `terminales` SET `nombre` = '$nombre', `descrip` = '$descrip', `tipo_terminal` = '$tipo' WHERE `terminales`.`id` = $id";
     $resultado = $conexion->query($sql);
     if ($resultado) {
         echo 1;

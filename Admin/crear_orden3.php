@@ -6,7 +6,7 @@ $sql2 = "SELECT * FROM carga";
 $result2 = mysqli_query($conexion, $sql2);
 $sql3 = "SELECT * FROM trabajador";
 $result3 = mysqli_query($conexion, $sql3);
-$sql4 = "SELECT * FROM terminales";
+$sql4 = "SELECT * FROM terminales WHERE tipo_terminal=1";
 $result4 = mysqli_query($conexion, $sql4);
 $sql5 = "SELECT * FROM tipo_operacion";
 $result5 = mysqli_query($conexion, $sql5);
@@ -16,6 +16,8 @@ $sql7 = "SELECT * FROM unidades";
 $result7 = mysqli_query($conexion, $sql7);
 $sql8 = "SELECT * FROM clientes";
 $result8 = mysqli_query($conexion, $sql8);
+$sql9 = "SELECT * FROM terminales WHERE tipo_terminal=2";
+$result9 = mysqli_query($conexion, $sql9);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -193,9 +195,20 @@ $result8 = mysqli_query($conexion, $sql8);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Patio de destino</label>
+                  <label class="col-sm-2 col-sm-2 control-label">
+                    Patio de Destino
+                  </label>
                   <div class="col-sm-4">
-                    <input type="text" name='patio_destino' class="form-control">
+                    <select class="form-control" name='patio_destino'>
+                      <option value="0">-</option>
+                      <?php
+                      while ($Row1 = mysqli_fetch_array($result9)) {
+                      ?>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
