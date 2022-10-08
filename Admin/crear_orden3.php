@@ -226,7 +226,7 @@ $result8 = mysqli_query($conexion, $sql8);
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3">Fecha de inicio servicio</label>
+                  <label class="control-label col-md-3">Fecha de fin servicio</label>
                   <div class="col-md-3 col-xs-11">
                     <input class="form-control form-control-inline" size="16" type="date" name="termino_estadias">
                     <span class="help-block">Selecciona una fecha</span>
