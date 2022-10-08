@@ -36,7 +36,7 @@ include 'php/conexion.php';
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM unidades WHERE tipo_unidad=1";
+                  $sql = "SELECT * FROM unidades";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
@@ -59,11 +59,6 @@ include 'php/conexion.php';
                       <td style="display: none;"><?php echo $mostrar['noeconomico'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['serie'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
-                      <td style="display: none;"><?php if ($mostrar['descripcion'] > 1) {
-                                                    echo "Unidad de Proveedor";
-                                                  } else {
-                                                    echo "Unidad Propia";
-                                                  } ?></td>
                       <td>
                         <a href='./editar_unidad.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                         <a onclick="eliminarUnidad(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
