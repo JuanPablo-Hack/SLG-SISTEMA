@@ -112,7 +112,7 @@ $result8 = mysqli_query($conexion, $sql8);
                       <?php
                       while ($Row1 = mysqli_fetch_array($result6)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre'] . '-' . $Row1['descrip']; ?></option>
                       <?php
                       }
                       ?>
