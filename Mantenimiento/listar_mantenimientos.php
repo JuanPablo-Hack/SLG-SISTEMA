@@ -5,15 +5,15 @@ include 'php/conexion.php';
 <html lang="en">
 
 <head>
-  <?php include 'templates/head.php'; ?>
+  <?php include("templates/head.php"); ?>
 </head>
 
 <body>
   <section id="container">
-    <?php include 'templates/nav.php'; ?>
+    <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Listado de Mantenimientos</h3>
+        <h3><i class="fa fa-angle-right"></i> Bitacora de viajes locales</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
@@ -21,12 +21,15 @@ include 'php/conexion.php';
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                   <tr>
-                    <th>Folio</th>
                     <th>Unidad</th>
-                    <th class="numeric">Fecha de entrada</th>
-                    <th class="numeric">Fecha del próximo servicio</th>
-                    <th class="numeric">Kilometraje</th>
-                    <th>Acciones</th>
+                    <th>Operador</th>
+                    <th class="hidden-phone">Taller Mecanico</th>
+                    <th class="hidden-phone">No. Factura</th>
+                    <th class="hidden-phone">Acciones</th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
+                    <th style="display: none;"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,27 +39,36 @@ include 'php/conexion.php';
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
                     <tr>
-                      <td><a href="./detalles_mantenimiento.php?id_mantenimiento=<?php echo $mostrar['id']  ?>"><?php echo 'MANTOS2022-' . $mostrar['id'] ?></a></td>
-                      <td><a href="./detalles_unidad.php?id_unidad=<?php echo $mostrar['unidad']  ?>"><?php
-                                                                                                      $sql1 = "SELECT * FROM unidades WHERE id='" . $mostrar['unidad'] . "'";
-                                                                                                      $result1 = mysqli_query($conexion, $sql1);
-                                                                                                      if ($Row = mysqli_fetch_array($result1)) {
-                                                                                                        $nombre = $Row['modelo'];
-                                                                                                      }
-                                                                                                      echo $nombre;
-                                                                                                      ?></a></td>
-                      <td><?php echo $mostrar['creado'] ?></td>
-                      <td><?php echo $mostrar['fecha'] ?></td>
-                      <td><?php echo $mostrar['km'] ?></td>
+                      <td><?php
+
+
+                          $sql1 = "SELECT * FROM unidades WHERE id='" . $mostrar['unidad'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['modelo'];
+                          }
+                          echo $nombre;
+                          ?></td>
+                      <td><?php
+
+
+                          $sql1 = "SELECT * FROM tipo_carga WHERE id='" . $mostrar['operador'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
+                          }
+                          echo $nombre;
+                          ?></td>
+
+                      <td><?php echo $mostrar['taller'] ?></td>
+                      <td><?php echo $mostrar['nofactura'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['fecha'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['km'] ?></td>
+                      <td style="display: none;"><?php echo $mostrar['factura_arch'] ?></td>
                       <td>
-
-
-
                         <a href='./editar_mantenimiento.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                         <a onclick="eliminarMantenimiento(<?php echo $mostrar['id'] ?>)" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o "></i></a>
-
-
-
                       </td>
                     </tr>
                   <?php
@@ -69,16 +81,10 @@ include 'php/conexion.php';
           <!-- page end-->
         </div>
         <!-- /row -->
-
-        <!-- /content-panel -->
-        </div>
-        <!-- /col-lg-12 -->
-        </div>
-        <!-- /row -->
       </section>
       <!-- /wrapper -->
     </section>
-    <?php include 'templates/footer.php'; ?>
+    <?php include("templates/footer.php"); ?>
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="../assets/lib/jquery/jquery.min.js"></script>
@@ -91,11 +97,41 @@ include 'php/conexion.php';
   <script type="text/javascript" src="../assets/lib/advanced-datatable/js/DT_bootstrap.js"></script>
   <!--common script for all pages-->
   <script src="../assets/lib/common-scripts.js"></script>
-  <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
   <!--script for this page-->
   <script type="text/javascript">
-    $(document).ready(function() {
+    /* Formating function for row details */
+    function fnFormatDetails(oTable, nTr) {
+      var aData = oTable.fnGetData(nTr);
+      var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+      sOut += '<tr><td>Descripción:</td><td>' + aData[5] + '</td></tr>';
+      sOut += '<tr><td>Fecha del próximo servicio:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Kilometraje:</td><td>' + aData[7] + '</td></tr>';
+      sOut += '<tr><td>Factura:</td><td><a href="../control_unidades/mantenimiento/' + aData[4] + '/' + aData[8] + '" target="_blank" rel="noopener noreferrer"> <i class="fa fa-file"></i></a></td></tr>';
+      sOut += '</table>';
 
+      return sOut;
+    }
+
+    $(document).ready(function() {
+      /*
+       * Insert a 'details' column to the table
+       */
+      var nCloneTh = document.createElement('th');
+      var nCloneTd = document.createElement('td');
+      nCloneTd.innerHTML = '<img src="../assets/lib/advanced-datatable/images/details_open.png">';
+      nCloneTd.className = "center";
+
+      $('#hidden-table-info thead tr').each(function() {
+        this.insertBefore(nCloneTh, this.childNodes[0]);
+      });
+
+      $('#hidden-table-info tbody tr').each(function() {
+        this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+      });
+
+      /*
+       * Initialse DataTables, with no sorting on the 'details' column
+       */
       var oTable = $('#hidden-table-info').dataTable({
         "aoColumnDefs": [{
           "bSortable": false,
@@ -106,11 +142,89 @@ include 'php/conexion.php';
         ]
       });
 
-
+      /* Add event listener for opening and closing details
+       * Note that the indicator for showing which row is open is not controlled by DataTables,
+       * rather it is done here
+       */
+      $('#hidden-table-info tbody td img').live('click', function() {
+        var nTr = $(this).parents('tr')[0];
+        if (oTable.fnIsOpen(nTr)) {
+          /* This row is already open - close it */
+          this.src = "../assets/lib/advanced-datatable/images/details_open.png";
+          oTable.fnClose(nTr);
+        } else {
+          /* Open this row */
+          this.src = "../assets/lib/advanced-datatable/images/details_close.png";
+          oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+        }
+      });
     });
   </script>
   <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="js/controller.js"></script>
+  <script>
+    function eliminarMantenimiento(id) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: "Estas seguro?",
+          text: "¡No podrás revertir esto!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, eliminar",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            let data = new FormData();
+            data.append("id", id);
+            data.append("accion", "eliminar");
+            fetch("php/mantenimiento_controller.php", {
+                method: "POST",
+                body: data,
+              })
+              .then((result) => result.text())
+              .then((result) => {
+                if (result == 1) {
+                  swalWithBootstrapButtons.fire(
+                    "Eliminado!",
+                    "Su archivo ha sido eliminado.",
+                    "success"
+                  );
+                  setTimeout(function() {
+                    location.reload();
+                  }, 3000);
+                } else {
+                  swalWithBootstrapButtons.fire(
+                    "Error",
+                    "Hemos tenido un error a la base de datos o la conexión.",
+                    "error"
+                  );
+                  setTimeout(function() {
+                    location.reload();
+                  }, 3000);
+                }
+              });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelado",
+              "Tu archivo ha sido salvado",
+              "error"
+            );
+          }
+        });
+    }
+  </script>
 </body>
 
 </html>

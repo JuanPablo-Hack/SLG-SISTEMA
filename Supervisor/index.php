@@ -295,7 +295,7 @@
     $(document).ready(function() {
       var unique_id = $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'Bienvenido Administrador',
+        title: 'Bienvenido Supervisor',
         // (string | mandatory) the text inside the notification
         text: 'Recuerda de revisar todos tus pendientes para la semana, éxito!.',
         // (string | optional) the image to display on the left

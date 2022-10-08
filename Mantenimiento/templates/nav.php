@@ -35,9 +35,7 @@
                     <span>Unidades</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="alta_unidad.php">Alta de Unidad</a></li>
                     <li><a href="listar_unidades.php">Bitacora de Unidades</a></li>
-
                 </ul>
             </li>
             <li class="sub-menu">
@@ -48,17 +46,6 @@
                 <ul class="sub">
                     <li><a href="bitacora_mantenimiento.php">Crear Registro</a></li>
                     <li><a href="listar_mantenimientos.php">Bitacora</a></li>
-
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-tint"></i>
-                    <span>Bitacora de Combustible</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="bitacora_combustible.php">Crear Registro</a></li>
-                    <li><a href="listar_combustible.php">Bitacora</a></li>
 
                 </ul>
             </li>

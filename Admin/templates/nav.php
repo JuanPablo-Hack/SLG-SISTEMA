@@ -81,11 +81,22 @@
                 </a>
                 <ul class="sub">
                     <li><a href="alta_proveedor.php">Crear proveedores</a></li>
-                    <li><a href="alta_trabajador.html">Lista de proveedores</a></li>
+                    <li><a href="listar_proveedores.php">Lista de proveedores</a></li>
                     <li><a href="alta_cliente.php">Crear Clientes</a></li>
-                    <li><a href="listar_trabajador.php">Listar Clientes</a></li>
+                    <li><a href="listar_cliente.php">Listar Clientes</a></li>
                     <li><a href="alta_trabajador.php">Crear trabajador</a></li>
-                    <li><a href="alta_trabajador.html">Lista de trabajadores</a></li>
+                    <li><a href="listar_trabajador.php">Lista de trabajadores</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-money"></i>
+                    <span>Contabilidad</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="alta_facturas.php">Alta de Facturas</a></li>
+                    <li><a href="listar_facturas.php">Bitacora de facturas</a></li>
+
                 </ul>
             </li>
             <li class="sub-menu">
@@ -97,7 +108,7 @@
                     <li><a href="listar_mercancia.php">Tipos de mercancia</a></li>
                     <li><a href="listar_presentaciones.php">Presentaciones de mercancia</a></li>
                     <li><a href="listar_tiposoperaciones.php">Tipos de operacion</a></li>
-                    <li><a href="listar_tipocontenedor.php">Tipos de contenedor</a></li>
+                    <li><a href="listar_tiposcontenedor.php">Tipos de contenedor</a></li>
                     <li><a href="listar_unidadesmedida.php">Unidades de medida</a></li>
                     <li><a href="listar_tipos_servicios.php">Tipos de servicio</a></li>
                     <li><a href="listar_cargas.php">Tipos de carga</a></li>

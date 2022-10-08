@@ -95,7 +95,7 @@ include 'php/conexion.php';
                     title: "Estas seguro que la información es la correcta?",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonText: "Si, agregar actividad",
+                    confirmButtonText: "Si, agregar tipo de contenedor",
                     cancelButtonText: "No, cancelar!",
                     reverseButtons: true,
                 })
@@ -103,7 +103,7 @@ include 'php/conexion.php';
                     if (result.isConfirmed) {
                         let data = new FormData(form);
                         data.append("accion", "agregar");
-                        fetch("php/presentacion_controller.php", {
+                        fetch("php/tipocontenedor_controller.php", {
                                 method: "POST",
                                 body: data,
                             })
@@ -112,7 +112,7 @@ include 'php/conexion.php';
                                 if (result == 1) {
                                     swalWithBootstrapButtons.fire(
                                         "Agregado!",
-                                        "La actividad ha sido agregado en la base de datos.",
+                                        "El tipo de contenedor ha sido agregado en la base de datos.",
                                         "success"
                                     );
                                     form.reset();

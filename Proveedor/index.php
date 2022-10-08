@@ -1,6 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+  header("Location: ../error_login.html");
+} else {
+  if ($_SESSION['datos_cargados'] == 0) {
+    header("Location: ./profile.php");
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <?php include("templates/head.php"); ?>
 </head>
@@ -295,9 +304,9 @@
     $(document).ready(function() {
       var unique_id = $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'Bienvenido Administrador',
+        title: 'Bienvenido Proveedor',
         // (string | mandatory) the text inside the notification
-        text: 'Recuerda de revisar todos tus pendientes para la semana, éxito!.',
+        text: 'Sistema ERP Soca Logistic buscamos hacer el proceso más rápido con este sistema, éxito!.',
         // (string | optional) the image to display on the left
         image: '../assets/img/banner.png',
         // (bool | optional) if you want it to fade out on its own or just sit there
