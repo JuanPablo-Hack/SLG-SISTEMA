@@ -57,7 +57,7 @@ function salida_material($id, $transportista, $operador, $placas_tracto, $placas
 function eliminar_material($id)
 {
     include './conexion.php';
-    $sql = "DELETE FROM actividad WHERE id='" . $id . "'";
+    $sql = "DELETE FROM ingreso_almacen WHERE id='" . $id . "'";
     $result = mysqli_query($conexion, $sql);
     if (!$result) {
         echo 2;

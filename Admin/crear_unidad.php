@@ -1,3 +1,8 @@
+<?php
+include 'php/conexion.php';
+$sql = "SELECT * FROM tipos_transporte";
+$result = mysqli_query($conexion, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,10 +59,19 @@
                                         <input class="form-control " id="curl" type="text" name="capacidad" />
                                     </div>
                                 </div>
-                                <div class="form-group ">
-                                    <label for="curl" class="control-label col-lg-2">Tipo de unidad</label>
-                                    <div class="col-lg-6">
-                                        <input class="form-control " id="curl" type="text" name="tipo_unidad" />
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">Tipo de unidad</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name='tipo_unidad'>
+                                            <option value="0">-</option>
+                                            <?php
+                                            while ($Row1 = mysqli_fetch_array($result)) {
+                                            ?>
+                                                <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -78,6 +92,7 @@
                                         <textarea class="form-control " id="ccomment" name="descripcion"></textarea>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-theme" type="submit">Enviar</button>

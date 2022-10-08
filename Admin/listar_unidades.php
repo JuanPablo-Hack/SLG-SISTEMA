@@ -25,8 +25,8 @@ include 'php/conexion.php';
                     <th>Placas</th>
                     <th class="hidden-phone">Capacidad</th>
                     <th class="hidden-phone">Combustible</th>
+                    <th class="hidden-phone">Tipo de Unidad</th>
                     <th class="hidden-phone">Acciones</th>
-                    <th style="display: none;"></th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
                     <th style="display: none;"></th>
@@ -36,7 +36,7 @@ include 'php/conexion.php';
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM unidades WHERE tipo_unidad=1";
+                  $sql = "SELECT * FROM unidades";
                   $resultado = $conexion->query($sql);
                   while ($mostrar = mysqli_fetch_array($resultado)) {
                   ?>
@@ -46,10 +46,17 @@ include 'php/conexion.php';
                       <td><?php echo $mostrar['placas'] ?></td>
                       <td><?php echo $mostrar['capacidad'] ?></td>
                       <td><?php echo $mostrar['tipocombustible'] ?></td>
+                      <td><?php
+                          $sql1 = "SELECT * FROM tipos_transporte WHERE id='" . $mostrar['tipounidad'] . "'";
+                          $result1 = mysqli_query($conexion, $sql1);
+                          if ($Row = mysqli_fetch_array($result1)) {
+                            $nombre = $Row['nombre'];
+                          }
+                          echo $nombre;
+                          ?></td>
                       <td style="display: none;"><?php echo $mostrar['ano'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['color'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['noeconomico'] ?></td>
-                      <td style="display: none;"><?php echo $mostrar['tipounidad'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['serie'] ?></td>
                       <td style="display: none;"><?php echo $mostrar['descripcion'] ?></td>
                       <td>
@@ -95,15 +102,14 @@ include 'php/conexion.php';
       var aData = oTable.fnGetData(nTr);
       var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
       sOut += '<tr><td>Modelo:</td><td>' + aData[1] + '</td></tr>';
-      sOut += '<tr><td>Año:</td><td>' + aData[5] + '</td></tr>';
-      sOut += '<tr><td>Color:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Año:</td><td>' + aData[6] + '</td></tr>';
+      sOut += '<tr><td>Color:</td><td>' + aData[7] + '</td></tr>';
       sOut += '<tr><td>Placas:</td><td>' + aData[2] + '</td></tr>';
-      sOut += '<tr><td>No. Economico:</td><td>' + aData[7] + '</td></tr>';
+      sOut += '<tr><td>No. Economico:</td><td>' + aData[8] + '</td></tr>';
       sOut += '<tr><td>Capacidad:</td><td>' + aData[3] + '</td></tr>';
-      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[8] + '</td></tr>';
+      sOut += '<tr><td>Tipo de unidad:</td><td>' + aData[5] + '</td></tr>';
       sOut += '<tr><td>Tipo Combustible:</td><td>' + aData[4] + '</td></tr>';
-      sOut += '<tr><td>Serie:</td><td>' + aData[9] + '</td></tr>';
-      sOut += '<tr><td>Descripción:</td><td>' + aData[10] + '</td></tr>';
+      sOut += '<tr><td>Serie:</td><td>' + aData[10] + '</td></tr>';
       sOut += '</table>';
 
       return sOut;
