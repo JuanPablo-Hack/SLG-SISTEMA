@@ -69,9 +69,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="crear_unidad.php">Dar de alta</a></li>
-                    <li><a href="listar_unidades.php">Mis Unidades</a></li>
-                    <li><a href="alta_unidad.html">Dar de operadores</a></li>
-                    <li><a href="listar_unidades.php">Mis operadores</a></li>
+                    <li><a href="listar_unidades.php">Mis Unidades</a></li>           
                 </ul>
             </li>
             <li class="sub-menu">
@@ -84,7 +82,7 @@
                     <li><a href="listar_proveedores.php">Lista de proveedores</a></li>
                     <li><a href="alta_cliente.php">Crear Clientes</a></li>
                     <li><a href="listar_cliente.php">Listar Clientes</a></li>
-                    <li><a href="alta_trabajador.html">Crear trabajador</a></li>
+                    <li><a href="alta_trabajador.php">Crear trabajador</a></li>
                     <li><a href="listar_trabajador.php">Lista de trabajadores</a></li>
                 </ul>
             </li>
