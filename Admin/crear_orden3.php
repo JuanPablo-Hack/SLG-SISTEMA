@@ -2,7 +2,7 @@
 include 'php/conexion.php';
 $sql = "SELECT * FROM tipo_servicio";
 $result = mysqli_query($conexion, $sql);
-$sql2 = "SELECT * FROM tipo_carga";
+$sql2 = "SELECT * FROM carga";
 $result2 = mysqli_query($conexion, $sql2);
 $sql3 = "SELECT * FROM trabajador";
 $result3 = mysqli_query($conexion, $sql3);
