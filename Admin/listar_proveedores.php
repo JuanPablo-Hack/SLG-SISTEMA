@@ -13,7 +13,7 @@ include 'php/conexion.php';
         <?php include("templates/nav.php"); ?>
         <section id="main-content">
             <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i> Bitacora de viajes locales</h3>
+                <h3><i class="fa fa-angle-right"></i> Bitacora de proovedores</h3>
                 <div class="row mb">
                     <!-- page start-->
                     <div class="content-panel">

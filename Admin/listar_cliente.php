@@ -58,7 +58,6 @@ include 'php/conexion.php';
                                             <td style="display: none;"><?php echo $mostrar['tel_representante'] ?></td>
                                             <td style="display: none;"><?php echo $mostrar['email_representante'] ?></td>
                                             <td>
-                                                <a href='./editar_orden2.php?id=<?php echo $mostrar['id']  ?>' class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <a onclick="eliminarCliente(<?php echo $mostrar['id']  ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
                                             </td>
                                         </tr>

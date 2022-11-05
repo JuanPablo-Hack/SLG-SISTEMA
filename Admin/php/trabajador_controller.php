@@ -13,17 +13,12 @@ switch ($_POST['accion']) {
 function crear_trabajador($nombre, $curp, $rfc, $nss, $cargo, $user_2, $contra, $recontra)
 {
     include './conexion.php';
-    if ($contra == $recontra) {
-        $sql = "INSERT INTO trabajador(nombre,curp,rfc,nss,cargo,user,pwd) VALUES ('$nombre','$curp','$rfc','$nss','$cargo','$user_2','$contra')";
-        $resultado = $conexion->query($sql);
-        if ($resultado) {
-            echo 1;
-        } else {
-            echo 0;
-        }
-    } else {
+    $sql = "INSERT INTO `trabajador` (`id`, `nombre`, `curp`, `rfc`, `nss`, `cargo`, `user`, `pwd`) VALUES (NULL, '$nombre', '$curp', '$rfc', '$nss', '$cargo', '$user_2', '$contra')";
+    $resultado = $conexion->query($sql);
+    if (!$resultado) {
         echo 0;
     }
+    echo 1;
 }
 function editar_trabajador($nombre, $curp, $rfc, $nss, $cargo, $user, $contra, $recontra)
 {

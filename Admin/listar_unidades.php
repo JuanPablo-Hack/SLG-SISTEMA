@@ -13,7 +13,7 @@ include 'php/conexion.php';
     <?php include("templates/nav.php"); ?>
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Bitacora de mercancia</h3>
+        <h3><i class="fa fa-angle-right"></i> Bitacora de unidades</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
