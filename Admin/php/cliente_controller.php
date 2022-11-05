@@ -39,7 +39,7 @@ function editar_cliente($id, $nombre, $email)
 function eliminar_cliente($id)
 {
   include './conexion.php';
-  $sql = "DELETE FROM carga WHERE id='" . $id . "'";
+  $sql = "DELETE FROM clientes WHERE id='" . $id . "'";
   $result = mysqli_query($conexion, $sql);
   if (!$result) {
     echo 2;
@@ -243,7 +243,7 @@ function enviar_email($correo, $new_password)
                     >
                       <p style="margin: 0">
                         <a
-                          href="https://example.com/"
+                          href="http://slg.gruposoca.com.mx/"
                           style="
                             background: #00aaa1;
                             text-decoration: none;
@@ -297,7 +297,7 @@ function enviar_email($correo, $new_password)
                     <p style="margin: 0; font-size: 14px; line-height: 20px">
                       &reg; Gruposoca, todos los derechos reservados 2022<br /><a
                         class="unsub"
-                        href="http://www.example.com/"
+                        href="http://slg.gruposoca.com.mx/"
                         style="color: #fff; text-decoration: underline"
                         >www.gruposoca.com.mx</a
                       >
@@ -312,18 +312,8 @@ function enviar_email($correo, $new_password)
     </body>
   </html>
   ';
-
-  //para el envío en formato HTML 
   $headers = "MIME-Version: 1.0\r\n";
   $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-
-  //dirección del remitente 
   $headers .= "From: Sistema ERP SLG <sistemas@gruposoca.com.mx>\r\n";
-
-
-
-
-
-
   mail($destinatario, $asunto, $cuerpo, $headers);
 }

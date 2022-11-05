@@ -13,7 +13,7 @@ switch ($_POST['accion']) {
     editar_viajeforaneo($_POST['id'], $_POST['transportista'], $_POST['operador'], $_POST['placas_tracto'], $_POST['placas_remolque'], $_POST['no_caja'], $_POST['tipo_contenedor'], $_POST['no_sello'], $_POST['cantidad'], $_POST['unidad_medida'], $_POST['firma_operador'], $_POST['firma_supervisor']);
     break;
   case 'eliminar_viajelocal':
-    eliminar_viajelocal($_POST['id'], $_POST['transportista'], $_POST['operador'], $_POST['placas_tracto'], $_POST['placas_remolque'], $_POST['no_caja'], $_POST['tipo_contenedor'], $_POST['no_sello'], $_POST['cantidad'], $_POST['unidad_medida'], $_POST['firma_operador'], $_POST['firma_supervisor']);
+    eliminar_viajelocal($_POST['id']);
     break;
   case 'eliminar_viajeforaneo':
     eliminar_viajeforaneo($_POST['id'], $_POST['transportista'], $_POST['operador'], $_POST['placas_tracto'], $_POST['placas_remolque'], $_POST['no_caja'], $_POST['tipo_contenedor'], $_POST['no_sello'], $_POST['cantidad'], $_POST['unidad_medida'], $_POST['firma_operador'], $_POST['firma_supervisor']);
@@ -71,14 +71,14 @@ function editar_viajeforaneo($id)
 
 function eliminar_viajelocal($id)
 {
-  // include './conexion.php';
-  // $sql = "DELETE FROM actividad WHERE id='" . $id . "'";
-  // $result = mysqli_query($conexion, $sql);
-  // if (!$result) {
-  //     echo 2;
-  // } else {
-  //     echo 1;
-  // }
+  include './conexion.php';
+  $sql = "DELETE FROM viajes_locales WHERE id='" . $id . "'";
+  $result = mysqli_query($conexion, $sql);
+  if (!$result) {
+    echo 2;
+  } else {
+    echo 1;
+  }
 }
 
 function eliminar_viajeforaneo($id)
