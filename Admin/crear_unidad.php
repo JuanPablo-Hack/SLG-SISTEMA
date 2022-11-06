@@ -143,71 +143,7 @@ $result = mysqli_query($conexion, $sql);
     <script src="../assets/lib/advanced-form-components.js"></script>
     <script src="../assets/lib/sweetalert2/sweetalert2.all.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("FormUnidad").addEventListener("submit", crearUnidad);
-        });
-        async function crearUnidad(e) {
-            e.preventDefault();
-            var form = document.getElementById("FormUnidad");
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-danger",
-                },
-                buttonsStyling: false,
-            });
-            swalWithBootstrapButtons
-                .fire({
-                    title: "Estas seguro que la información es la correcta?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Si, agregar unidad",
-                    cancelButtonText: "No, cancelar!",
-                    reverseButtons: true,
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        let data = new FormData(form);
-                        data.append("accion", "agregar");
-                        fetch("php/unidad_controller.php", {
-                                method: "POST",
-                                body: data,
-                            })
-                            .then((result) => result.text())
-                            .then((result) => {
-                                if (result == 1) {
-                                    swalWithBootstrapButtons.fire(
-                                        "Agregado!",
-                                        "La unidad ha sido agregado en la base de datos.",
-                                        "success"
-                                    );
-                                    form.reset();
-                                    setTimeout(function() {
-                                        location.reload();
-                                    }, 2000);
-                                } else {
-                                    swalWithBootstrapButtons.fire(
-                                        "Error",
-                                        "Hemos tenido un error a la base de datos o la conexión.",
-                                        "error"
-                                    );
-                                    setTimeout(function() {
-                                        location.reload();
-                                    }, 2000);
-                                }
-                            });
-                    } else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire(
-                            "Cancelado",
-                            "Revise su información de nuevo",
-                            "error"
-                        );
-                    }
-                });
-        }
+       
     </script>
 
 </body>

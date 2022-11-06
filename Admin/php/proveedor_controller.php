@@ -39,7 +39,7 @@ function editar_proveedores($id, $nombre, $email)
 function eliminar_proveedores($id)
 {
   include './conexion.php';
-  $sql = "DELETE FROM carga WHERE id='" . $id . "'";
+  $sql = "DELETE FROM proveedores WHERE id='" . $id . "'";
   $result = mysqli_query($conexion, $sql);
   if (!$result) {
     echo 2;

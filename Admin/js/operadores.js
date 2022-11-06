@@ -128,3 +128,32 @@ function eliminarOperador(id) {
       }
     });
 }
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("FormTrabajador")
+    .addEventListener("submit", crearTrabajador);
+});
+async function crearTrabajador(e) {
+  e.preventDefault();
+  console.log("Agregar Trabajador");
+  var form = document.getElementById("FormTrabajador");
+  let data = new FormData(form);
+  data.append("accion", "agregar");
+  fetch("php/trabajador_controller.php", {
+    method: "POST",
+    body: data,
+  })
+    .then((result) => result.text())
+    .then((result) => {
+      if (result == 1) {
+        document.getElementById("success").style.display = "inherit";
+        document.getElementById("wrong").style.display = "none";
+        setTimeout(function () {
+          location.reload();
+        }, 2000);
+      } else {
+        document.getElementById("success").style.display = "none";
+        document.getElementById("wrong").style.display = "inherit";
+      }
+    });
+}
