@@ -1,6 +1,5 @@
 <h3><i class="fa fa-angle-right"></i> Lista de mercancias</h3>
 <div class="row mb">
-    <!-- page start-->
     <div class="content-panel">
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Crear nueva mercancia</button> <br><br>
         <?php include 'views/mercancias/agregar.php'; ?>

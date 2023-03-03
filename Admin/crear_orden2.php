@@ -4,6 +4,8 @@ $sql = "SELECT * FROM tipo_contenedor";
 $result = mysqli_query($conexion, $sql);
 $sql2 = "SELECT * FROM ingreso_almacen";
 $result2 = mysqli_query($conexion, $sql2);
+$sql3 = "SELECT * FROM unidades_medidas";
+$result3 = mysqli_query($conexion, $sql3);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +17,91 @@ $result2 = mysqli_query($conexion, $sql2);
 <body>
   <section id="container">
     <?php include("templates/nav.php"); ?>
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <p class="centered"><a href="profile.html"><img src="../assets/img/slg.png" class="img-circle" width="80"></a></p>
+          <h5 class="centered">Admin</h5>
+          <li class="mt">
+            <a href="index.php">
+              <i class="fa fa-dashboard"></i>
+              <span>Panel de Control</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;" class="active">
+              <i class="fa fa-tag"></i>
+              <span>Almacen</span>
+            </a>
+            <ul class="sub">
+              <li><a href="listar_ingresos.php">Bitacoras de Ingresos</a></li>
+              <li class="active"><a href="listar_salidad.php">Bitacoras de Salidas</a></li>
+              <li><a href="listar_orden.php">Bitacora de mercancia</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-truck"></i>
+              <span>Viajes</span>
+            </a>
+            <ul class="sub">
+              <li><a href="listar_orden2.php">Viajes Locales</a></li>
+              <li><a href="listar_orden3.php">Viajes Foraneos</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-car"></i>
+              <span>Unidades</span>
+            </a>
+            <ul class="sub">
+              <li><a href="listar_unidades.php">Mis Unidades</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-group"></i>
+              <span>Usuarios</span>
+            </a>
+            <ul class="sub">
+              <li><a href="listar_proveedores.php">Lista de proveedores</a></li>
+              <li><a href="listar_cliente.php">Listar Clientes</a></li>
+              <li><a href="listar_trabajador.php">Lista de trabajadores</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-money"></i>
+              <span>Contabilidad</span>
+            </a>
+            <ul class="sub">
+              <li><a href="listar_facturas.php">Bitacora de facturas</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-cogs"></i>
+              <span>Variables del sistema</span>
+            </a>
+            <ul class="sub">
+              <li><a href="listar_mercancia.php">Tipos de mercancia</a></li>
+              <li><a href="listar_presentaciones.php">Presentaciones de mercancia</a></li>
+              <li><a href="listar_tiposoperaciones.php">Tipos de operacion</a></li>
+              <li><a href="listar_tiposcontenedor.php">Tipos de contenedor</a></li>
+              <li><a href="listar_unidadesmedida.php">Unidades de medida</a></li>
+              <li><a href="listar_tipos_servicios.php">Tipos de servicio</a></li>
+              <li><a href="listar_cargas.php">Tipos de carga</a></li>
+              <li><a href="listar_terminales.php">Terminales de carga</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </aside>
     <section id="main-content">
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i> Crear Salida de Mercancía</h3>
         <div class="row mt">
-          <!--  DATE PICKERS -->
           <div class="col-lg-12">
             <div class="form-panel">
               <form class="form-horizontal style-form" id="formSalidaMercancia" enctype="multipart/form-data">
@@ -31,7 +113,7 @@ $result2 = mysqli_query($conexion, $sql2);
                       <?php
                       while ($Row1 = mysqli_fetch_array($result2)) {
                       ?>
-                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['modelo']; ?></option>
+                        <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
                       }
                       ?>
@@ -105,7 +187,7 @@ $result2 = mysqli_query($conexion, $sql2);
                     <select class="form-control" name='unidad_medida'>
                       <option value="0"></option>
                       <?php
-                      while ($Row1 = mysqli_fetch_array($result)) {
+                      while ($Row1 = mysqli_fetch_array($result3)) {
                       ?>
                         <option value=<?php echo $Row1['id']; ?>><?php echo $Row1['nombre']; ?></option>
                       <?php
