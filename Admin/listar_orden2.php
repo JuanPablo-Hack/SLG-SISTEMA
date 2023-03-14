@@ -97,7 +97,7 @@ include 'php/conexion.php';
         <h3><i class="fa fa-angle-right"></i> Bitacora de viajes locales</h3>
         <div class="row mb">
           <div class="content-panel">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Crear viaje local</button> <br><br>
+            <a class="btn btn-success" href="./crear_orden3.php">Crear viaje local</a> <br><br>
 
             <div class="adv-table">
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
