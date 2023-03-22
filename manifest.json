@@ -1,7 +1,7 @@
 {
-  "name": "Coparmex Manzanillo",
-  "short_name": "Coparmex Mzo",
-  "start_url": "index.php",
+  "name": "Sistema ERP SLG",
+  "short_name": "APP SLG",
+  "start_url": "login.html",
   "display": "standalone",
   "background_color": "#fdfdfd",
   "theme_color": "#db4938",
